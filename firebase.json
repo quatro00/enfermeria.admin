@@ -1,0 +1,6 @@
+{
+    "hosting": {
+    "site": "gruas-admin",
+    "public": "dist\\hexadash"
+  }
+}
