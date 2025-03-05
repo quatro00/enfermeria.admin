@@ -10,6 +10,8 @@ import { ServicioRegistroComponent } from './servicio-registro/servicio-registro
 import { ColaboradoresRegistroComponent } from './colaboradores-registro/colaboradores-registro.component';
 import { ColaboradoresComponent } from './colaboradores/colaboradores.component';
 import { ServiciosActivosComponent } from './servicios-activos/servicios-activos.component';
+import { PagoRegistroComponent } from './pago-registro/pago-registro.component';
+import { ReportePacientesComponent } from './reporte-pacientes/reporte-pacientes.component';
 
 const routes: Routes = [
   {
@@ -61,6 +63,14 @@ const routes: Routes = [
     //canActivate: [authAdminGuard]
   },
   {
+    path: 'reporte-pacientes',
+    component: ReportePacientesComponent,
+    data: {
+        title: 'Reporte de servicios',
+    },
+    //canActivate: [authAdminGuard]
+  },
+  {
     path: 'servicio-registro',
     component: ServicioRegistroComponent,
     data: {
@@ -81,6 +91,14 @@ const routes: Routes = [
     component: ColaboradoresRegistroComponent,
     data: {
         title: 'Registrar colaborador',
+    },
+    //canActivate: [authAdminGuard]
+  },
+  {
+    path: 'pago-registro',
+    component: PagoRegistroComponent,
+    data: {
+        title: 'Registrar pago',
     },
     //canActivate: [authAdminGuard]
   }

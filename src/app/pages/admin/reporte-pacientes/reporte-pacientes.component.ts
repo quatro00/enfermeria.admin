@@ -15,11 +15,11 @@ import { Component } from '@angular/core';
         @apply dark:bg-white/10 dark:border-white/10 dark:text-white/60 dark:hover:text-white/100;
       }
     `],
-  selector: 'app-colaboradores',
-  templateUrl: './colaboradores.component.html',
-  styleUrls: ['./colaboradores.component.css']
+  selector: 'app-reporte-pacientes',
+  templateUrl: './reporte-pacientes.component.html',
+  styleUrls: ['./reporte-pacientes.component.css']
 })
-export class ColaboradoresComponent {
+export class ReportePacientesComponent {
 
   isVisible = false;
   isLoading = true;
@@ -39,7 +39,16 @@ export class ColaboradoresComponent {
       key: 'nombre',
       compare: (a: any, b: any) => a.descripcion.localeCompare(b.descripcion)
     },
-
+    {
+      title: 'Apellidos',
+      key: 'apellidos',
+      compare: (a: any, b: any) => a.descripcion.localeCompare(b.descripcion)
+    },
+    {
+      title: 'Sexo',
+      key: 'sexo',
+      compare: (a: any, b: any) => a.estatusContratoMantenimientoId.localeCompare(b.estatusContratoMantenimientoId)
+    },
     {
       title: 'Teléfono',
       key: 'telefono',
@@ -48,36 +57,36 @@ export class ColaboradoresComponent {
     {
       title: 'Correo electrónico',
       key: 'correoElectronico',
+      compare: (a: any, b: any) => a.estatusContratoMantenimientoId.localeCompare(b.estatusContratoMantenimientoId)
+    },
+    {
+      title: 'Edad',
+      key: 'edad',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'RFC',
-      key: 'rfc',
+      title: 'Fecha de nacimiento',
+      key: 'fechaNacimiento',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'CURP',
-      key: 'curp',
+      title: 'Peso',
+      key: 'peso',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'Cedula',
-      key: 'cedula',
+      title: 'Estatura',
+      key: 'estatura',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'Domicilio',
-      key: 'domicilio',
+      title: 'Discpacidad',
+      key: 'discapacidad',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'Estados',
-      key: 'estados',
-      compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
-    },
-    {
-      title: 'Activo',
-      key: 'activo',
+      title: 'Descripción',
+      key: 'descripcion',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
   ];

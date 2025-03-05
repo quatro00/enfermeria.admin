@@ -1,1 +1,169 @@
-<p>colaboradores-registro works!</p>
+<div nz-row nzGutter="25">
+    <!-- skeleton -->
+    <ng-template #loadingSkeleton>
+        <nz-skeleton class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true"
+            [nzParagraph]="{ rows: 6 }"></nz-skeleton>
+    </ng-template>
+    <!-- skeleton -->
+    <div nz-col nzXs="24" class="mb-[25px]">
+        <ng-container *ngIf="showContent; else loadingSkeleton">
+            <div
+                class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative mb-[25px]">
+                <div
+                    class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+                    <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Registrar colaborador</h4>
+                </div>
+                <div class="p-[25px]">
+                    <form nz-form>
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Nombre
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="nombre" type="text" id="nombre">
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Apellidos
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="apellidos" type="text" id="apellidos">
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Teléfono
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="telefono" type="text" id="telefono">
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Correo electrónico
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="correoElectronico" type="text" id="apellicorreoElectronicodoPaterno">
+                            </nz-form-control>
+                        </nz-form-item>
+
+                       
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">RFC
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="rfc" type="text" id="rfc">
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">CURP
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="curp" type="text" id="curp">
+                            </nz-form-control>
+                        </nz-form-item>
+                      
+                       
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Cedula profesional
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="cedula" type="text" id="cedula">
+                            </nz-form-control>
+                          
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Domicilio calle.
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="calle" type="text" id="calle">
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Número
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="numero" type="text" id="numero">
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">C.P.
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="cp" type="text" id="cp">
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Colonia
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="colonia" type="text" id="colonia">
+                            </nz-form-control>
+                          
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Estados
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="colonia" type="text" id="colonia">
+                            </nz-form-control>
+
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea1">Tipo
+                            </nz-form-label>
+                            <nz-form-control nzXs="9">
+                                <input
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    nz-input name="colonia" type="text" id="colonia">
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item  nzJustify="end">
+                            <nz-form-control nzXs="22"></nz-form-control>
+
+                            <nz-form-control nzXs="2">
+                              <div class="flex flex-wrap gap-[15px]">
+                                <button nz-button class="bg-primary hover:bg-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] duration-300">
+                                  <span>Guardar</span>
+                                </button>
+                              </div>
+                            </nz-form-control>
+                          </nz-form-item >
+                    </form>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

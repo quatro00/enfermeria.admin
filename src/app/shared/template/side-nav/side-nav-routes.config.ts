@@ -13,14 +13,6 @@ export const AdminRoutes: SideNavInterface[] = [
     submenu:[]
   },
   {
-    path: 'administrador/servicio-registro',
-    title: 'Registrar servicio',
-    iconType: 'nzIcon',
-    iconTheme: 'outline',
-    icon: '',
-    submenu:[]
-  },
-  {
     path: 'administrador/servicios-activos',
     title: 'Servicios activos',
     iconType: 'nzIcon',
@@ -29,8 +21,24 @@ export const AdminRoutes: SideNavInterface[] = [
     submenu:[]
   },
   {
+    path: 'administrador/servicio-registro',
+    title: 'Registrar servicio',
+    iconType: 'nzIcon',
+    iconTheme: 'outline',
+    icon: '',
+    submenu:[]
+  },
+  {
     path: 'administrador/colaboradores-registro',
     title: 'Registrar colaborador',
+    iconType: 'nzIcon',
+    iconTheme: 'outline',
+    icon: '',
+    submenu:[]
+  },
+  {
+    path: 'administrador/pago-registro',
+    title: 'Registrar pago',
     iconType: 'nzIcon',
     iconTheme: 'outline',
     icon: '',
@@ -46,6 +54,14 @@ export const AdminRoutes: SideNavInterface[] = [
       {
         path: 'administrador/reporte-servicio',
         title: 'Servicios',
+        iconType: 'nzIcon',
+        iconTheme: 'outline',
+        icon: '',
+        submenu:[]
+      },
+      {
+        path: 'administrador/reporte-pacientes',
+        title: 'Pacientes',
         iconType: 'nzIcon',
         iconTheme: 'outline',
         icon: '',

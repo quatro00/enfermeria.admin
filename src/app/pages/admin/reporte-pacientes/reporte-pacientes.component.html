@@ -11,7 +11,7 @@
         <div class="flex items-center justify-center md:justify-end">
          <button class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"  nz-button >
            <i class="text-[12px]" nz-icon nzType="plus"></i>
-           <span class="m-0">Registrar servicio</span>
+           <span class="m-0">Registrar paciente</span>
          </button>
        </div>
          <!-- end: New Contact -->
@@ -56,17 +56,6 @@
                       <input formControlName="fechaInicio"  style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
                     </nz-form-control>
                   </nz-form-item>
-                  <nz-form-item class="mb-[25px]">
-                    <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="6"
-                      nzFor="textarea1">Tipo
-                    </nz-form-label>
-                    <nz-form-control nzXs="18">
-                      <nz-select class="basic-select" name="basicSelect" formControlName="estatusPagoId">
-                        <nz-option nzLabel="Todos" [nzValue]="0"></nz-option>
-                        <nz-option *ngFor="let option of estatus" [nzLabel]="option.descripcion" [nzValue]="option.id"></nz-option>
-                      </nz-select>
-                    </nz-form-control>
-                  </nz-form-item>
                   <nz-form-item>
 
                     <nz-form-control nzXs="19"></nz-form-control>
@@ -91,7 +80,7 @@
             class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative h-full">
             <div
               class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
-              <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Servicios</h4>
+              <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Pacientes</h4>
             </div>
             <div class="p-[25px]" style="padding-top: 0px !important;">
               <div>
