@@ -27,7 +27,7 @@ export class ServicesInterceptorInterceptor implements HttpInterceptor {
         headers['Authorization'] = token;
       }
 
-      console.log(this.cookieService.get('Authorization'));
+      //console.log(this.cookieService.get('Authorization'));
       localStorage.getItem('Authorization');
     const authRequest = request.clone({
       setHeaders: headers

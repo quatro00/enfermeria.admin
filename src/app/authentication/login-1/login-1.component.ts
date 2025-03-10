@@ -60,12 +60,12 @@ export class Login1Component {
      this.authService.Login(request)
      .subscribe({
       error:(err)=> {
-        console.log('error3',err);
+        //console.log('error3',err);
         this.loadingbtn_Entrar=false;
       },
       next:(response:LoginResponse)=>{
         //set auth cookie
-        console.log('seteamos el usuario',response);
+        //console.log('seteamos el usuario',response);
         localStorage.setItem('Authorization',`Bearer ${response.token}`);
         this.cookieService.set('Authorization',`Bearer ${response.token}`, undefined, '/', undefined, true, 'Strict');
         this.authService.setUser({

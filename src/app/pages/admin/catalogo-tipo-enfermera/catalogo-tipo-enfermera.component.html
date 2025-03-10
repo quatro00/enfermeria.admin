@@ -1,113 +1,49 @@
-<nz-modal [nzMaskClosable]="false" [nzWidth]="'80%'" [(nzVisible)]="isVisible" [nzTitle]="modalTitle"
-  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="cerrarModal()">
-  <ng-template #modalTitle>Asignar equipo medico</ng-template>
+<nz-modal [nzMaskClosable]="false" [(nzVisible)]="isVisible" [nzTitle]="modalTitle" [nzContent]="modalContent"
+  [nzFooter]="modalFooter" (nzOnCancel)="cerrarModal()">
+  <ng-template #modalTitle>{{ titulo }}</ng-template>
 
   <ng-template #modalContent>
-    <div class="p-[25px]">
-      <div class="w-full overflow-x-auto">
-        <input #fileInput accept=".pdf" type="file" (change)="onFileSelect($event)" style="display: none;">
-
-        <nz-table #basicTable nzShowSizeChanger [nzData]="filteredData_Asignacion">
-          <thead>
-            <tr>
-              <th
-                class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden [&:first-child]:rounded-s-[10px] [&:last-child]:rounded-e-[10px] capitalize"
-                *ngFor="let column of listOfColumnEquipoMed" [nzSortFn]="column.compare">
-                {{ column.title }}
-              </th>
-              
-              <th
-                class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
-                Mantenimientos al año
-              </th>
-              <th
-                class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
-                Costo de mantenimiento con iva
-              </th>
-              <th
-                class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="group expiring-row" *ngFor="let item of basicTable.data">
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.area }}</td>
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.descripcion }}</td>
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.descripcionCorta }}</td>
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.importe | currency: 'USD':'symbol':'1.2-2' }}</td>
-
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.serie }}</td>
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.noInventario }}</td>
-
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                {{ item.fechaAdquisicion | date: 'dd/MM/yyyy'}}</td>
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                <input type="text" [(ngModel)]="item.cantidadServiciosAnual" type="number" min="0"
-                  class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-primary dark:border-gray-600 dark:focus:border-white"
-                  placeholder="Cantidad de mantenimientos anual">
-              </td>
-
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                <input type="text" [(ngModel)]="item.costoPorServicioConIva" type="number" min="0"
-                  class="w-full bg-transparent border-b border-gray-300 focus:outline-none focus:border-primary dark:border-gray-600 dark:focus:border-white"
-                  placeholder="Costo del servicio con iva">
-              </td>
-
-              <td
-                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-
-
-                <table>
-                  <tr>
-                    <td *ngIf="item.asignado === 0 || !item.asignado">
-                      <button (click)="asignarEquipoMedico(item)" nz-tooltip nzTooltipTitle="Asignar" nz-button
-                        class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
-                        <span class="text-[14px]" nz-icon nzType="check" nzTheme="outline"></span>
-                      </button>
-                    </td>
-
-                    <td *ngIf="item.asignado === 1">
-                      <button (click)="desasignarEquipoMedico(item)" nz-tooltip nzTooltipTitle="Desasignar" nz-button
-                        class="bg-danger/10 hover:bg-danger-hbr border-none text-danger hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
-                        <span class="text-[14px]" nz-icon nzType="close" nzTheme="outline"></span>
-                      </button>
-                    </td>
-                  </tr>
-                </table>
-
-
-
-
-              </td>
-            </tr>
-          </tbody>
-        </nz-table>
-      </div>
-    </div>
-
-
-
+    <form nz-form nzLayout="vertical" [formGroup]="form" (ngSubmit)="submitForm()">
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Campo requerido.">
+          <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">No:</nz-form-label>
+          <input formControlName="no" style="color:white"
+            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+            type="text" nz-input>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Campo requerido.">
+          <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Descripción:</nz-form-label>
+          <input formControlName="descripcion" style="color:white"
+            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+            type="text" nz-input>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Campo requerido.">
+          <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Valor:</nz-form-label>
+          <input formControlName="valor" style="color:white"
+            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+            type="text" nz-input>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzErrorTip="Campo requerido.">
+          <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Costo por
+            hora:</nz-form-label>
+          <input formControlName="costoHora" style="color:white"
+            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+            type="text" nz-input>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
   </ng-template>
 
   <ng-template #modalFooter>
     <button
       class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
-      nz-button nzType="primary" (click)="guardarAsignacionEquipoMedico()" [nzLoading]="isLoadingMdl">Guardar</button>
+      nz-button nzType="primary" (click)="guardar()" [nzLoading]="isLoadingMdl">Guardar</button>
   </ng-template>
 </nz-modal>
 
@@ -122,7 +58,7 @@
   <div nz-col nzXs="24" class="mb-[25px]">
     <!-- New Contact -->
     <div class="flex items-center justify-center md:justify-end">
-      <button 
+      <button (click)="muestraModal()"
         class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"
         nz-button>
         <i class="text-[12px]" nz-icon nzType="plus"></i>
@@ -185,37 +121,29 @@
                 <tr class="group expiring-row" *ngFor="let item of basicTable.data">
                   <td
                     class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.noContrato }}</td>
+                    {{ item.id }}</td>
+                  <td
+                    class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                    {{ item.no }}</td>
                   <td
                     class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
                     {{ item.descripcion }}</td>
                   <td
                     class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.estatusContratoMantenimientoId }}</td>
+                    {{ item.valor }}</td>
                   <td
                     class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.importe | currency: 'USD':'symbol':'1.2-2' }}</td>
+                    {{ item.costoHora | currency: 'USD':'symbol':'1.2-2' }}</td>
 
                   <td
                     class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.equipos }}</td>
-                  <td
-                    class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.proveedor }}</td>
-                  <td
-                    class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.correoElectronico }}</td>
-                  <td
-                    class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.telefono }}</td>
-
-                  <td
-                    class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.inicio | date: 'dd/MM/yyyy'}}</td>
-                  <td
-                    class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                    {{ item.termino | date: 'dd/MM/yyyy'}}</td>
-
+                    <nz-checkbox-wrapper
+                      class="flex flex-col w-full capitalize basic-checkbox text-theme-gray dark:text-white/60 gap-[5px] mb-[15px]"
+                      (nzOnChange)="log($event, item.id)">
+                      <label class=" m-0 text-dark dark:text-white/[.87]" nz-checkbox nzValue="1"
+                        [ngModel]="!!item.activo"></label>
+                    </nz-checkbox-wrapper>
+                  </td>
 
                   <td
                     class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
@@ -223,29 +151,10 @@
 
                     <table>
                       <tr>
-                        <td *ngIf="item.estatusContratoMantenimientoId === 1">
-                          <button (click)="verEquipoMed(item.id)" nz-tooltip nzTooltipTitle="Editar" nz-button
+                        <td>
+                          <button (click)="editarItem(item)" nz-tooltip nzTooltipTitle="Editar" nz-button
                             class="bg-info/10 hover:bg-info-hbr border-none text-info hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
                             <span class="text-[14px]" nz-icon nzType="edit" nzTheme="outline"></span>
-                          </button>
-                        </td>
-                        <td *ngIf="item.estatusContratoMantenimientoId === 1">
-                          <button (click)="showAsignacionEquipoMedico(item.id)" nz-tooltip
-                            nzTooltipTitle="Asignar equipos medicos" nz-button
-                            class="bg-info/10 hover:bg-info-hbr border-none text-info hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
-                            <span class="text-[14px]" nz-icon nzType="desktop" nzTheme="outline"></span>
-                          </button>
-                        </td>
-                        <td *ngIf="item.estatusContratoMantenimientoId === 1">
-                          <button (click)="cerrarCapturaContrato(item.id)" nz-tooltip nzTooltipTitle="Cerrar captura" nz-button
-                            class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
-                            <span class="text-[14px]" nz-icon nzType="check" nzTheme="outline"></span>
-                          </button>
-                        </td>
-                        <td *ngIf="item.estatusContratoMantenimientoId === 2">
-                          <button (click)="asignarMantenimientos(item.id)" nz-tooltip nzTooltipTitle="Asignar mantenimientos" nz-button
-                            class="bg-info/10 hover:bg-info-hbr border-none text-info hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
-                            <span class="text-[14px]" nz-icon nzType="calendar" nzTheme="outline"></span>
                           </button>
                         </td>
                       </tr>
@@ -255,6 +164,7 @@
 
 
                   </td>
+
                 </tr>
               </tbody>
             </nz-table>

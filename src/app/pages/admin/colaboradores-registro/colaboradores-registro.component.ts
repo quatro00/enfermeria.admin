@@ -1,4 +1,14 @@
+import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { forkJoin } from 'rxjs';
+import { ColaboradorService } from 'src/app/services/colaborador.service';
+import { EstadoService } from 'src/app/services/estado.service';
+import { ExcelService } from 'src/app/services/excel.service';
+import { TipoEnfermeraService } from 'src/app/services/tipoEnfermera.service';
 
 @Component({
   selector: 'app-colaboradores-registro',
@@ -21,19 +31,147 @@ import { Component } from '@angular/core';
 })
 export class ColaboradoresRegistroComponent {
   isVisible = false;
-  isLoading = true;
-  showContent = false;
-  
-  contratoMantenimientoId;
-  searchValue = '';
+      isLoading = true;
+      isLoadingMdl = false;
+      showContent = false;
+      editar = false;
+      id = '';
+    
+      contratoMantenimientoId;
+      searchValue = '';
+      titulo = '';
+    
+      data: any[] = [];
+      filteredData: any[] = [];
+    
+      estados: any[] = [];
+      tipoEnfermera: any[] = [];
+
+      form!: UntypedFormGroup;
+
+
+  constructor(
+        private modalService: NzModalService,
+        private msg: NzMessageService,
+        private router: Router,
+        private datePipe: DatePipe,
+        private fb: UntypedFormBuilder,
+        private excelService: ExcelService,
+        private tipoEnfermeraService: TipoEnfermeraService,
+        private estadoService: EstadoService,
+        private colaboradorService: ColaboradorService,
+      ) { }
 
   ngOnInit() {
+
+    this.form = this.fb.group({
+              nombre: [null, [Validators.required]],
+              apellidos: [null, [Validators.required]],
+              telefono: [null, [Validators.required]],
+              correoElectronico: [null, [Validators.required]],
+              rfc: [null, [Validators.required]],
+              curp: [null, [Validators.required]],
+              cedulaProfesional: [null, [Validators.required]],
+              domicilioCalle: [null, [Validators.required]],
+              domicilioNumero: [null, [Validators.required]],
+              cp: [null, [Validators.required]],
+              colonia: [null, [Validators.required]],
+              estados: [null, [Validators.required]],
+              tipoEnfermera: [null, [Validators.required]],
+
+              banco: [null, [Validators.required]],
+              clabe: [null, [Validators.required]],
+              cuenta: [null, [Validators.required]],
+              
+              
+            });
+
     this.loadData();
   }
 
   loadData() {
 
-    this.isLoading = false;
-    this.showContent = true;
+    forkJoin([
+      this.estadoService.Get(),
+      this.tipoEnfermeraService.Get()
+    ]).subscribe({
+      next: ([estadosReponse, tipoEnfermeraResponse]) => {
+        this.estados = estadosReponse;
+        this.tipoEnfermera = tipoEnfermeraResponse;
+
+        /*
+        this.form.patchValue({
+          proveedor: 0,
+          tipoGrua: 0
+        });
+        */
+      },
+      complete: () => {
+        this.isLoading = false;
+        this.showContent = true;
+      },
+      error: () => {
+        this.isLoading = false;
+        // Maneja el error si es necesario
+        this.msg.error("Ocurrio un error inesperado.");
+      }
+    });
+    
+  }
+
+  guardar(){
+    
+    let request: any =
+      {
+        nombre: this.form.value.nombre,
+        apellidos: this.form.value.apellidos,
+        telefono: this.form.value.telefono,
+        correoElectronico: this.form.value.correoElectronico,
+        rfc: this.form.value.rfc,
+        curp: this.form.value.curp,
+        cedulaProfesional: this.form.value.cedulaProfesional,
+        domicilioCalle: this.form.value.domicilioCalle,
+        domicilioNumero: this.form.value.domicilioNumero,
+        cp: this.form.value.cp,
+        colonia: this.form.value.colonia,
+        banco: this.form.value.banco,
+        clabe: this.form.value.clabe,
+        cuenta: this.form.value.cuenta,
+        tipoEnfermeraId:this.form.value.tipoEnfermera,
+        estados:this.form.value.estados
+      }
+      
+    if (this.form.valid) {
+      this.isLoading = true;
+      
+      this.colaboradorService.Create(request)
+      .subscribe({
+        next: (response) => {
+          this.loadData();
+        },
+        complete: () => {
+          this.isLoading = false;
+          this.form.reset();
+          this.msg.success('Colaborador creado correctamente');
+        },
+        error: () => {
+          this.isLoading = false;
+        }
+      })
+
+      /*
+            this.btnLoading = true;
+            */
+    } else {
+      
+      Object.values(this.form.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({
+            onlySelf: true
+          });
+        }
+      });
+    }
   }
 }

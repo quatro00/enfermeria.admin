@@ -14,153 +14,174 @@
                     <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Registrar colaborador</h4>
                 </div>
                 <div class="p-[25px]">
-                    <form nz-form>
+                    <form nz-form [formGroup]="form">
                         <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Nombre
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Nombre</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="nombre" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="nombre" type="text" id="nombre">
+                                    type="text" nz-input>
                             </nz-form-control>
                             <nz-form-control nzXs="1"></nz-form-control>
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Apellidos
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Apellidos</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="apellidos" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="apellidos" type="text" id="apellidos">
+                                    type="text" nz-input>
                             </nz-form-control>
                         </nz-form-item>
 
                         <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Teléfono
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Teléfono</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="telefono" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="telefono" type="text" id="telefono">
+                                    type="text" nz-input>
                             </nz-form-control>
                             <nz-form-control nzXs="1"></nz-form-control>
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Correo electrónico
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Correo
+                                electrónico</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="correoElectronico" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="correoElectronico" type="text" id="apellicorreoElectronicodoPaterno">
-                            </nz-form-control>
-                        </nz-form-item>
-
-                       
-                        <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">RFC
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="rfc" type="text" id="rfc">
-                            </nz-form-control>
-                            <nz-form-control nzXs="1"></nz-form-control>
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">CURP
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="curp" type="text" id="curp">
-                            </nz-form-control>
-                        </nz-form-item>
-                      
-                       
-                        <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Cedula profesional
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="cedula" type="text" id="cedula">
-                            </nz-form-control>
-                          
-                        </nz-form-item>
-
-                        <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Domicilio calle.
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="calle" type="text" id="calle">
-                            </nz-form-control>
-                            <nz-form-control nzXs="1"></nz-form-control>
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Número
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="numero" type="text" id="numero">
+                                    type="text" nz-input>
                             </nz-form-control>
                         </nz-form-item>
 
                         <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">C.P.
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">RFC</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="rfc" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="cp" type="text" id="cp">
+                                    type="text" nz-input>
                             </nz-form-control>
                             <nz-form-control nzXs="1"></nz-form-control>
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Colonia
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Curp</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="curp" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="colonia" type="text" id="colonia">
+                                    type="text" nz-input>
                             </nz-form-control>
-                          
+                        </nz-form-item>
+
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Cedula
+                                profesional</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="cedulaProfesional" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
                         </nz-form-item>
 
                         <nz-form-item class="mb-[25px]">
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Estados
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Banco</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="banco" style="color:white"
                                     class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="colonia" type="text" id="colonia">
-                            </nz-form-control>
-
-                            <nz-form-control nzXs="1"></nz-form-control>
-                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
-                                nzFor="textarea1">Tipo
-                            </nz-form-label>
-                            <nz-form-control nzXs="9">
-                                <input
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    nz-input name="colonia" type="text" id="colonia">
+                                    type="text" nz-input>
                             </nz-form-control>
                         </nz-form-item>
-                        <nz-form-item  nzJustify="end">
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Cuenta</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="cuenta" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Clabe</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="clabe" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Domicilio
+                                calle</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="domicilioCalle" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Número</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="domicilioNumero" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">C.P.</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="cp" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Colonia</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="colonia" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Estados</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <nz-select nzMode="multiple"
+                                    class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                    name="estados" formControlName="estados">
+                                    <nz-option *ngFor="let option of estados" [nzValue]="option.id"
+                                        [nzLabel]="option.nombre"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Tipo</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <nz-select
+                                    class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                    name="tipoEnfermera" formControlName="tipoEnfermera">
+                                    <nz-option *ngFor="let option of tipoEnfermera" [nzValue]="option.id"
+                                        [nzLabel]="option.descripcion"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item nzJustify="end">
                             <nz-form-control nzXs="22"></nz-form-control>
 
                             <nz-form-control nzXs="2">
-                              <div class="flex flex-wrap gap-[15px]">
-                                <button nz-button class="bg-primary hover:bg-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] duration-300">
-                                  <span>Guardar</span>
-                                </button>
-                              </div>
+                                <div class="flex flex-wrap gap-[15px]">
+                                    <button (click)="guardar()" nz-button [nzLoading]="isLoading"
+                                        class="bg-primary hover:bg-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] duration-300">
+                                        <span>Guardar</span>
+                                    </button>
+                                </div>
                             </nz-form-control>
-                          </nz-form-item >
+                        </nz-form-item>
                     </form>
                 </div>
             </div>
