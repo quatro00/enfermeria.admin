@@ -9,7 +9,7 @@
     <div nz-col nzXs="24" class="mb-[25px]">
         <!-- New Contact -->
         <div class="flex items-center justify-center md:justify-end">
-         <button class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"  nz-button >
+         <button routerLink="/administrador/colaboradores-registro" class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"  nz-button >
            <i class="text-[12px]" nz-icon nzType="plus"></i>
            <span class="m-0">Registrar colaborador</span>
          </button>
@@ -26,17 +26,13 @@
               <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Busqueda</h4>
             </div>
             <div class="p-[25px]">
-              <form  [formGroup]="validateForm" nz-form>
+              <form  [formGroup]="form" nz-form>
                   <nz-form-item class="mb-[25px]">
                     <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="6"
                       nzFor="textarea1">Nombre
                     </nz-form-label>
                     <nz-form-control nzXs="18">
-                      <nz-select class="basic-select" name="basicSelect" formControlName="proveedorId">
-                        <nz-option nzLabel="Todos" [nzValue]="0"></nz-option>
-                        <nz-option *ngFor="let option of proveedores" [nzLabel]="option.noProveedor + ' - ' + option.razonSocial" [nzValue]="option.id">
-                        </nz-option>
-                      </nz-select>
+                      <input formControlName="nombre"  style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
                     </nz-form-control>
                   </nz-form-item>
                  
@@ -45,7 +41,7 @@
                       nzFor="textarea2">Correo electrónico
                     </nz-form-label>
                     <nz-form-control nzXs="18">
-                      <input formControlName="fechaInicio"  style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
+                      <input formControlName="correoElectronico"  style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
                     </nz-form-control>
                   </nz-form-item>
                   <nz-form-item>
@@ -53,7 +49,7 @@
                       nzFor="textarea2">Teléfono
                     </nz-form-label>
                     <nz-form-control nzXs="18">
-                      <input formControlName="fechaInicio"  style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
+                      <input formControlName="telefono"  style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
                     </nz-form-control>
                   </nz-form-item>
                   <nz-form-item class="mb-[25px]">
@@ -61,9 +57,9 @@
                       nzFor="textarea1">Tipo
                     </nz-form-label>
                     <nz-form-control nzXs="18">
-                      <nz-select class="basic-select" name="basicSelect" formControlName="estatusPagoId">
-                        <nz-option nzLabel="Todos" [nzValue]="0"></nz-option>
-                        <nz-option *ngFor="let option of estatus" [nzLabel]="option.descripcion" [nzValue]="option.id"></nz-option>
+                      <nz-select class="basic-select" name="basicSelect" formControlName="tipo">
+                        <nz-option nzLabel="TODOS" [nzValue]="0"></nz-option>
+                        <nz-option *ngFor="let option of tipos" [nzLabel]="option.descripcion" [nzValue]="option.id"></nz-option>
                       </nz-select>
                     </nz-form-control>
                   </nz-form-item>
@@ -71,7 +67,7 @@
 
                     <nz-form-control nzXs="19"></nz-form-control>
                     <nz-form-control nzXs="4">
-                        <button [nzLoading]="btnLoadingBusqueda" class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]" (click)="buscarServicios()" nz-button >
+                        <button [nzLoading]="isLoading" class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]" (click)="buscarServicios()" nz-button >
                             <i class="text-[12px]" nz-icon nzType="search"></i>
                             <span class="m-0">Buscar</span>
                           </button>
@@ -141,25 +137,27 @@
                               </thead>
                               <tbody>
                               <tr class="group" *ngFor="let item of basicTable.data">
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.folio }}</td>
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.cliente }}</td> 
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.no }}</td>
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.nombre }}</td> 
                                  <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.telefono }}</td> 
   
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.estado }}</td> 
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.origen }}</td>
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.destino }}</td> 
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.total | currency: 'USD':'symbol':'1.2-2' }}</td>
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.correoElectronico }}</td> 
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.rfc }}</td>
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.curp }}</td> 
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.cedula }}</td>
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.domicilio }}</td>
                                  <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                                
-                                  <span
-                                  class="inline-flex items-center justify-center bg-active/10 text-active min-h-[24px] px-3 text-xs font-medium rounded-[15px] capitalize"
-                                >
-                                {{ item.estatus }}
-                                </span>
-                                </td>
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.proveedor }}</td>
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.grua }}</td>
-                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.tipo }}</td>
+                                  <div *ngFor="let estado of item.estados">{{ estado }}</div>
+                                 </td>
+                                 <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">{{ item.estatus }}</td>
+                                 
+                                 <td
+                                 class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                 <nz-checkbox-wrapper class="flex flex-col w-full capitalize basic-checkbox text-theme-gray dark:text-white/60 gap-[5px] mb-[15px]" (nzOnChange)="log($event, item.id)">
+                                   <label class=" m-0 text-dark dark:text-white/[.87]" nz-checkbox nzValue="1" [ngModel]="!!item.activo"></label>
+                                 </nz-checkbox-wrapper>
+                               </td>
+
                                  <td class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
 
                                   <button  (click)="verServicio(item.id)" nz-tooltip nzTooltipTitle="Ver servicio" nz-button

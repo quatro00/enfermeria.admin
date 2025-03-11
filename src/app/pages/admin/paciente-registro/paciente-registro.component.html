@@ -1,0 +1,173 @@
+<div nz-row nzGutter="25">
+    <!-- skeleton -->
+    <ng-template #loadingSkeleton>
+        <nz-skeleton class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true"
+            [nzParagraph]="{ rows: 6 }"></nz-skeleton>
+    </ng-template>
+    <!-- skeleton -->
+    <div nz-col nzXs="24" class="mb-[25px]">
+        <ng-container *ngIf="showContent; else loadingSkeleton">
+            <div
+                class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative mb-[25px]">
+                <div
+                    class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+                    <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Registrar paciente</h4>
+                </div>
+                <div class="p-[25px]">
+                    <form nz-form [formGroup]="form">
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Nombre</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="nombre" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Apellidos</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="apellidos" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Teléfono</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="telefono" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Correo
+                                electrónico</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="correoElectronico" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Fecha de nacimiento</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="fechaNacimiento" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Genero</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <nz-select
+                                class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                name="genero" formControlName="genero">
+                                <nz-option *ngFor="let option of opcionesGenero" [nzValue]="option.id"
+                                    [nzLabel]="option.descripcion"></nz-option>
+                            </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Peso</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="peso" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Estatura</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="estatura" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Discapacidad</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <nz-select
+                                    class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                    name="discapacidad" formControlName="discapacidad">
+                                    <nz-option *ngFor="let option of opcionesCompletas" [nzValue]="option.id"
+                                        [nzLabel]="option.descripcion"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Descripción</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="discapacidadDescripcion" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">C.P.</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="cp" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Colonia</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <input formControlName="colonia" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                        <nz-form-item class="mb-[25px]">
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Estados</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <nz-select nzMode="multiple"
+                                    class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                    name="estados" formControlName="estados">
+                                    <nz-option *ngFor="let option of estados" [nzValue]="option.id"
+                                        [nzLabel]="option.nombre"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                            <nz-form-control nzXs="1"></nz-form-control>
+                            <nz-form-label style="text-align: left;" nzXs="2"
+                                class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Tipo</nz-form-label>
+                            <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
+                                <nz-select
+                                    class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                    name="tipoEnfermera" formControlName="tipoEnfermera">
+                                    <nz-option *ngFor="let option of tipoEnfermera" [nzValue]="option.id"
+                                        [nzLabel]="option.descripcion"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item nzJustify="end">
+                            <nz-form-control nzXs="22"></nz-form-control>
+
+                            <nz-form-control nzXs="2">
+                                <div class="flex flex-wrap gap-[15px]">
+                                    <button (click)="guardar()" nz-button [nzLoading]="isLoading"
+                                        class="bg-primary hover:bg-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] duration-300">
+                                        <span>Guardar</span>
+                                    </button>
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>

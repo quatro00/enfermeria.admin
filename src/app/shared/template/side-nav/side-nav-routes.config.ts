@@ -21,6 +21,14 @@ export const AdminRoutes: SideNavInterface[] = [
     submenu:[]
   },
   {
+    path: 'administrador/paciente-registro',
+    title: 'Registrar paciente',
+    iconType: 'nzIcon',
+    iconTheme: 'outline',
+    icon: '',
+    submenu:[]
+  },
+  {
     path: 'administrador/servicio-registro',
     title: 'Registrar servicio',
     iconType: 'nzIcon',

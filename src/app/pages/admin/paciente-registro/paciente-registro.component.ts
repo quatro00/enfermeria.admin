@@ -11,9 +11,9 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { TipoEnfermeraService } from 'src/app/services/tipoEnfermera.service';
 
 @Component({
-  selector: 'app-colaboradores-registro',
-  templateUrl: './colaboradores-registro.component.html',
-  styleUrls: ['./colaboradores-registro.component.css'],
+  selector: 'app-paciente-registro',
+  templateUrl: './paciente-registro.component.html',
+  styleUrls: ['./paciente-registro.component.css'],
   styles: [`
     :host ::ng-deep .basic-select .ant-select-selector{
       @apply h-[50px] rounded-4 border-normal px-[20px] flex items-center dark:bg-white/10 dark:border-white/10 dark:text-white/60 dark:hover:text-white/100;
@@ -29,8 +29,8 @@ import { TipoEnfermeraService } from 'src/app/services/tipoEnfermera.service';
       }
     `]
 })
-export class ColaboradoresRegistroComponent {
-      isVisible = false;
+export class PacienteRegistroComponent {
+isVisible = false;
       isLoading = true;
       isLoadingMdl = false;
       showContent = false;
@@ -49,6 +49,15 @@ export class ColaboradoresRegistroComponent {
 
       form!: UntypedFormGroup;
 
+      opcionesCompletas = [
+        { id: '0', descripcion: 'No' },
+        { id: '1', descripcion: 'Si' },
+      ];
+
+      opcionesGenero = [
+        { id: 'M', descripcion: 'Masculino' },
+        { id: 'F', descripcion: 'Femenino' },
+      ];
 
   constructor(
         private modalService: NzModalService,
@@ -69,21 +78,12 @@ export class ColaboradoresRegistroComponent {
               apellidos: [null, [Validators.required]],
               telefono: [null, [Validators.required]],
               correoElectronico: [null, [Validators.required]],
-              rfc: [null, [Validators.required]],
-              curp: [null, [Validators.required]],
-              cedulaProfesional: [null, [Validators.required]],
-              domicilioCalle: [null, [Validators.required]],
-              domicilioNumero: [null, [Validators.required]],
-              cp: [null, [Validators.required]],
-              colonia: [null, [Validators.required]],
-              estados: [null, [Validators.required]],
-              tipoEnfermera: [null, [Validators.required]],
-
-              banco: [null, [Validators.required]],
-              clabe: [null, [Validators.required]],
-              cuenta: [null, [Validators.required]],
-              
-              
+              fechaNacimiento: [null, [Validators.required]],
+              genero: [null, [Validators.required]],
+              peso: [null, [Validators.required]],
+              estatura: [null, [Validators.required]],
+              discapacidad: [null, [Validators.required]],
+              discapacidadDescripcion: [null, [Validators.required]]
             });
 
     this.loadData();
@@ -125,20 +125,13 @@ export class ColaboradoresRegistroComponent {
       {
         nombre: this.form.value.nombre,
         apellidos: this.form.value.apellidos,
-        telefono: this.form.value.telefono,
-        correoElectronico: this.form.value.correoElectronico,
-        rfc: this.form.value.rfc,
-        curp: this.form.value.curp,
-        cedulaProfesional: this.form.value.cedulaProfesional,
-        domicilioCalle: this.form.value.domicilioCalle,
-        domicilioNumero: this.form.value.domicilioNumero,
-        cp: this.form.value.cp,
-        colonia: this.form.value.colonia,
-        banco: this.form.value.banco,
-        clabe: this.form.value.clabe,
-        cuenta: this.form.value.cuenta,
-        tipoEnfermeraId:this.form.value.tipoEnfermera,
-        estados:this.form.value.estados
+        fechaNacimiento: this.form.value.fechaNacimiento,
+        genero: this.form.value.genero,
+        peso: this.form.value.peso,
+        estatura: this.form.value.estatura,
+        discapacidad: this.form.value.discapacidad,
+        descripcionDiscapacidad: this.form.value.descripcionDiscapacidad
+
       }
       
     if (this.form.valid) {

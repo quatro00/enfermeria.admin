@@ -59,6 +59,7 @@ import { ColaboradoresRegistroComponent } from './colaboradores-registro/colabor
 import { ServiciosActivosComponent } from './servicios-activos/servicios-activos.component';
 import { PagoRegistroComponent } from './pago-registro/pago-registro.component';
 import { ReportePacientesComponent } from './reporte-pacientes/reporte-pacientes.component';
+import { PacienteRegistroComponent } from './paciente-registro/paciente-registro.component';
 
 const antdModule = [
   HotTableModule.forRoot(),
@@ -118,7 +119,8 @@ registerAllModules();
     ColaboradoresRegistroComponent,
     ServiciosActivosComponent,
     PagoRegistroComponent,
-    ReportePacientesComponent
+    ReportePacientesComponent,
+    PacienteRegistroComponent
   ],
   imports: [
     CommonModule,

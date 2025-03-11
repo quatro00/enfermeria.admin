@@ -122,7 +122,7 @@ export class CatalogoEstadosComponent {
       this.estadoService.Get()
     ]).subscribe({
       next: ([estadoResponse]) => {
-        console.log(estadoResponse);
+        
         this.data = estadoResponse;
         this.filteredData = estadoResponse;
       },

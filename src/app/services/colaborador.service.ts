@@ -18,6 +18,11 @@ export class ColaboradorService {
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`);
   }
 
+  GetColaboradores(request:any):Observable<any>{
+    console.log(request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/GetColaboradores`,request);
+  }
+
   Create(request:any):Observable<any>{
     return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
   }
