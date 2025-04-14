@@ -2,12 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { guid } from '@fullcalendar/core/internal';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { forkJoin } from 'rxjs';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 import { EstadoService } from 'src/app/services/estado.service';
 import { ExcelService } from 'src/app/services/excel.service';
+import { PacienteService } from 'src/app/services/paciente.service';
 import { TipoEnfermeraService } from 'src/app/services/tipoEnfermera.service';
 
 @Component({
@@ -40,7 +42,8 @@ isVisible = false;
       contratoMantenimientoId;
       searchValue = '';
       titulo = '';
-    
+
+      contactos: any[] = [];
       data: any[] = [];
       filteredData: any[] = [];
     
@@ -48,10 +51,35 @@ isVisible = false;
       tipoEnfermera: any[] = [];
 
       form!: UntypedFormGroup;
+      formContacto!: UntypedFormGroup;
+
+      listOfColumn = [
+        {
+          title: 'Nombre',
+          key: 'nombre',
+          compare: (a: any, b: any) => a.noContrato.localeCompare(b.noContrato)
+        },
+        {
+          title: 'Teléfono',
+          key: 'telefono',
+          compare: (a: any, b: any) => a.descripcion.localeCompare(b.descripcion)
+        },
+    
+        {
+          title: 'Correo electrónico',
+          key: 'correoElectronico',
+          compare: (a: any, b: any) => a.estatusContratoMantenimientoId.localeCompare(b.estatusContratoMantenimientoId)
+        },
+        {
+          title: 'Parentezco',
+          key: 'parentezco',
+          compare: (a: any, b: any) => a.estatusContratoMantenimientoId.localeCompare(b.estatusContratoMantenimientoId)
+        },
+      ];
 
       opcionesCompletas = [
-        { id: '0', descripcion: 'No' },
-        { id: '1', descripcion: 'Si' },
+        { id: false, descripcion: 'No' },
+        { id: true, descripcion: 'Si' },
       ];
 
       opcionesGenero = [
@@ -68,7 +96,7 @@ isVisible = false;
         private excelService: ExcelService,
         private tipoEnfermeraService: TipoEnfermeraService,
         private estadoService: EstadoService,
-        private colaboradorService: ColaboradorService,
+        private pacienteService: PacienteService,
       ) { }
 
   ngOnInit() {
@@ -83,12 +111,62 @@ isVisible = false;
               peso: [null, [Validators.required]],
               estatura: [null, [Validators.required]],
               discapacidad: [null, [Validators.required]],
-              discapacidadDescripcion: [null, [Validators.required]]
+              discapacidadDescripcion: [null, [Validators.required]],
+            });
+
+            this.formContacto = this.fb.group({
+              nombre: [null, [Validators.required]],
+              telefono: [null, [Validators.required]],
+              correoElectronico: [null, [Validators.required]],
+              parentezco: [null, [Validators.required]],
             });
 
     this.loadData();
   }
+  cerrarModal (){
+    this.isVisible = false;
+  }
+  agregarContacto(){
+    this.isVisible = true;
+  }
 
+  borrarContacto(id){
+    this.contactos = this.contactos.filter(c => c.id !== id);
+  }
+
+  guardarContacto(){
+    let request: any =
+      {
+        id: crypto.randomUUID(),
+        nombre: this.formContacto.value.nombre,
+        telefono: this.formContacto.value.telefono,
+        correoElectronico: this.formContacto.value.correoElectronico,
+        parentezco: this.formContacto.value.parentezco,
+      }
+      
+    if (this.formContacto.valid) {
+      //this.isLoading = true;
+      
+      this.contactos.push(request);
+      this.contactos = [...this.contactos];
+      
+      this.formContacto.reset();
+      this.isVisible = false;
+      /*
+            this.btnLoading = true;
+            */
+    } else {
+      
+      Object.values(this.form.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({
+            onlySelf: true
+          });
+        }
+      });
+    }
+  }
   loadData() {
 
     forkJoin([
@@ -125,19 +203,22 @@ isVisible = false;
       {
         nombre: this.form.value.nombre,
         apellidos: this.form.value.apellidos,
+        telefono: this.form.value.telefono,
+        correoElectronico: this.form.value.correoElectronico,
         fechaNacimiento: this.form.value.fechaNacimiento,
         genero: this.form.value.genero,
         peso: this.form.value.peso,
         estatura: this.form.value.estatura,
         discapacidad: this.form.value.discapacidad,
-        descripcionDiscapacidad: this.form.value.descripcionDiscapacidad
-
+        descripcionDiscapacidad: this.form.value.discapacidadDescripcion,
+        contactos:  this.contactos.map(({ id, ...resto }) => resto)
       }
+      
       
     if (this.form.valid) {
       this.isLoading = true;
       
-      this.colaboradorService.Create(request)
+      this.pacienteService.Crear(request)
       .subscribe({
         next: (response) => {
           this.loadData();
@@ -145,7 +226,9 @@ isVisible = false;
         complete: () => {
           this.isLoading = false;
           this.form.reset();
-          this.msg.success('Colaborador creado correctamente');
+          this.contactos = [];
+          this.contactos = [...this.contactos];
+          this.msg.success('Paciente creado correctamente');
         },
         error: () => {
           this.isLoading = false;
