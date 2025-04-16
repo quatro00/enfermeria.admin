@@ -86,9 +86,15 @@
                             <nz-form-label style="text-align: left;" nzXs="2"
                                 class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Banco</nz-form-label>
                             <nz-form-control nzXs="9" nzErrorTip="Campo requerido.">
-                                <input formControlName="banco" style="color:white"
-                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
-                                    type="text" nz-input>
+
+                                <nz-select
+                                    class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
+                                    name="banco" formControlName="banco">
+                                    <nz-option *ngFor="let option of bancos" [nzValue]="option.id"
+                                        [nzLabel]="option.nombre"></nz-option>
+                                </nz-select>
+
+
                             </nz-form-control>
                         </nz-form-item>
 

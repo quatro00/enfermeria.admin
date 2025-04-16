@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { forkJoin } from 'rxjs';
+import { BancoService } from 'src/app/services/banco.service';
 import { ColaboradorService } from 'src/app/services/colaborador.service';
 import { EstadoService } from 'src/app/services/estado.service';
 import { ExcelService } from 'src/app/services/excel.service';
@@ -46,6 +47,7 @@ export class ColaboradoresRegistroComponent {
     
       estados: any[] = [];
       tipoEnfermera: any[] = [];
+      bancos: any[] = [];
 
       form!: UntypedFormGroup;
 
@@ -60,6 +62,7 @@ export class ColaboradoresRegistroComponent {
         private tipoEnfermeraService: TipoEnfermeraService,
         private estadoService: EstadoService,
         private colaboradorService: ColaboradorService,
+        private bancoService: BancoService
       ) { }
 
   ngOnInit() {
@@ -93,12 +96,13 @@ export class ColaboradoresRegistroComponent {
 
     forkJoin([
       this.estadoService.Get(),
-      this.tipoEnfermeraService.Get()
+      this.tipoEnfermeraService.Get(),
+      this.bancoService.Get()
     ]).subscribe({
-      next: ([estadosReponse, tipoEnfermeraResponse]) => {
+      next: ([estadosReponse, tipoEnfermeraResponse, bancoResponse]) => {
         this.estados = estadosReponse;
         this.tipoEnfermera = tipoEnfermeraResponse;
-
+        this.bancos = bancoResponse;
         /*
         this.form.patchValue({
           proveedor: 0,
@@ -134,7 +138,7 @@ export class ColaboradoresRegistroComponent {
         domicilioNumero: this.form.value.domicilioNumero,
         cp: this.form.value.cp,
         colonia: this.form.value.colonia,
-        banco: this.form.value.banco,
+        bancoId: this.form.value.banco,
         clabe: this.form.value.clabe,
         cuenta: this.form.value.cuenta,
         tipoEnfermeraId:this.form.value.tipoEnfermera,

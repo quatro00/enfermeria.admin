@@ -17,8 +17,29 @@ export class ColaboradoresService {
 
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
-  GetColaboradores():Observable<GetColaboradoresModel[]>{
-    return this.http.get<any[]>(`${environment.apiBaseUrl}/api/${this.service}/GetColaboradores`);
+  EnviarDoccumentacion(formData: FormData): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}/api/${this.service}/AdjuntarDocumentacion`,formData);
+  }
+
+  GetColaboradores(request:any):Observable<any>{
+    let params = new HttpParams();
+
+    if (request.correoElectronico) {
+      params = params.set('CorreoElectronico', request.correoElectronico);
+    }
+  
+    if (request.nombre) {
+      params = params.set('Nombre', request.nombre);
+    }
+
+    if (request.telefono) {
+      params = params.set('Telefono', request.telefono);
+    }
+
+    if (request.tipo) {
+      params = params.set('Tipo', request.tipo);
+    }
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
   }
 
   GetColaborador(colaboradorId:string):Observable<GetColaboradoresModel>{
@@ -34,5 +55,9 @@ export class ColaboradoresService {
 
   Update(id:string, request:UpdateColaboradorModel):Observable<UpdateColaboradorModel>{
     return this.http.put<UpdateColaboradorModel>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,request);
+  }
+
+  ActivarColaborador(id:any):Observable<any>{
+    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/ActivarColaborador`,{});
   }
 }
