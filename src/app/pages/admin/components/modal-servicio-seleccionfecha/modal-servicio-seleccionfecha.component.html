@@ -1,0 +1,74 @@
+<nz-modal
+[nzContent]="modalContent"
+  [nzMaskClosable]="false"
+  [(nzVisible)]="isVisible"
+  [nzTitle]="modalTitle"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="cerrarModal()"
+
+>
+  <ng-template #modalTitle>Seleccionar fechas y horarios</ng-template>
+
+  <ng-template #modalContent>
+    <div class="flex items-center justify-center w-full mt-5 mb-[25px] max-md:flex-col max-md:justify-center gap-[15px]">
+        <div class="p-[25px]">
+            <form  [formGroup]="form" nz-form>
+
+                <nz-form-item class="mb-[25px]">
+                    <nz-form-label style="text-align: left;" nzXs="10"
+                    class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Fecha de inicio</nz-form-label>
+
+                    <nz-form-control nzXs="14" nzErrorTip="Campo requerido.">
+                        <input formControlName="fechaInicio" style="color:white" 
+                            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                            type="date" nz-input>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item class="mb-[25px]">
+                    <nz-form-label style="text-align: left;" nzXs="10"
+                    class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Fecha de termino</nz-form-label>
+
+                    <nz-form-control nzXs="14" nzErrorTip="Campo requerido.">
+                        <input formControlName="fechaTermino" style="color:white" 
+                            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                            type="date" nz-input>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item class="mb-[25px]">
+                    <nz-form-label style="text-align: left;" nzXs="10"
+                    class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Hora de inicio</nz-form-label>
+
+                    <nz-form-control nzXs="14" nzErrorTip="Campo requerido.">
+                        <input formControlName="horaInicio" style="color:white" 
+                            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                            type="time" nz-input>
+                    </nz-form-control>
+                </nz-form-item>
+
+                <nz-form-item class="mb-[25px]">
+                    <nz-form-label style="text-align: left;" nzXs="10"
+                    class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Hora de termino</nz-form-label>
+
+                    <nz-form-control nzXs="14" nzErrorTip="Campo requerido.">
+                        <input formControlName="horaTermino" style="color:white" 
+                            class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                            type="time" nz-input>
+                    </nz-form-control>
+                </nz-form-item>
+             
+
+                
+              </form>
+          </div>
+       
+      </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button
+      class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
+      nz-button nzType="primary" (click)="seleccionarFechas()" [nzLoading]="isLoadingMdl">Aceptar</button>
+  </ng-template>
+</nz-modal>

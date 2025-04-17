@@ -60,6 +60,8 @@ import { ServiciosActivosComponent } from './servicios-activos/servicios-activos
 import { PagoRegistroComponent } from './pago-registro/pago-registro.component';
 import { ReportePacientesComponent } from './reporte-pacientes/reporte-pacientes.component';
 import { PacienteRegistroComponent } from './paciente-registro/paciente-registro.component';
+import { ModalPacienteBusquedaComponent } from './components/modal-paciente-busqueda/modal-paciente-busqueda.component';
+import { ModalServicioSeleccionfechaComponent } from './components/modal-servicio-seleccionfecha/modal-servicio-seleccionfecha.component';
 
 const antdModule = [
   HotTableModule.forRoot(),
@@ -120,7 +122,9 @@ registerAllModules();
     ServiciosActivosComponent,
     PagoRegistroComponent,
     ReportePacientesComponent,
-    PacienteRegistroComponent
+    PacienteRegistroComponent,
+    ModalPacienteBusquedaComponent,
+    ModalServicioSeleccionfechaComponent
   ],
   imports: [
     CommonModule,

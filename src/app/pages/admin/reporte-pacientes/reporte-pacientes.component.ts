@@ -485,10 +485,6 @@ export class ReportePacientesComponent {
           this.btnLoading = false;
         }
       })
-
-      /*
-            this.btnLoading = true;
-            */
     } else {
       
       Object.values(this.form.controls).forEach(control => {

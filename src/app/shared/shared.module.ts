@@ -7,6 +7,7 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { ThemeConstantService } from './services/theme-constant.service';
 import { SearchPipe } from './pipes/search.pipe';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
     exports: [
@@ -22,6 +23,7 @@ import { SearchPipe } from './pipes/search.pipe';
         CommonModule,
         NzIconModule,
         NzToolTipModule,
+        NzModalModule
     ],
     declarations: [
         SearchPipe

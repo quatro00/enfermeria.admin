@@ -31,6 +31,8 @@ import { TipoLugarService } from 'src/app/services/tipoLugarService';
 })
 export class ServicioRegistroComponent {
   isVisible = false;
+  isVisibleFecha = false;
+
   isLoading = true;
   showContent = false;
   
@@ -43,7 +45,10 @@ export class ServicioRegistroComponent {
   estados:any[]=[];
   tipoEnfermera:any[]=[];
   tipoLugar:any[]=[];
+  pacienteSeleccionado:any = {};
 
+  data: any[] = [];
+  filteredData: any[] = [];
 
   opcionesSiNo = [
     { id: false, descripcion: 'No' },
@@ -54,11 +59,6 @@ export class ServicioRegistroComponent {
     {
       title: 'Fecha',
       key: 'fecha',
-      compare: (a: any, b: any) => a.noContrato.localeCompare(b.noContrato)
-    },
-    {
-      title: 'Tipo',
-      key: 'Tipo',
       compare: (a: any, b: any) => a.noContrato.localeCompare(b.noContrato)
     },
     {
@@ -138,6 +138,9 @@ export class ServicioRegistroComponent {
     this.loadData();
   }
 
+  guardarContacto(){
+    console.log(1);
+  }
   cerrarModal() {
     this.isVisible = false;
   }
@@ -145,6 +148,60 @@ export class ServicioRegistroComponent {
   muestraModal(){
     this.isVisible = true;
   }
+
+  cerrarModalFecha() {
+    this.isVisibleFecha = false;
+  }
+
+  muestraModalFecha(){
+    this.isVisibleFecha = true;
+  }
+
+  borrarFecha(index: number) {
+    this.filteredData.splice(index, 1);
+    // Si necesitas forzar el cambio en la tabla:
+    this.filteredData = [...this.filteredData];
+  }
+  
+  onFechaSeleccionada(fechas:any){
+    
+    const resultado = fechas.map(item => {
+      const inicio = new Date(item.fechaInicio);
+      const termino = new Date(item.fechaTermino);
+    
+      const fecha = inicio.toISOString().split('T')[0];
+      const horaInicio = inicio.toTimeString().substring(0, 5);
+      const horaTermino = termino.toTimeString().substring(0, 5);
+    
+      const diffMs = termino.getTime() - inicio.getTime();
+      const diffHoras = Math.ceil(diffMs / (1000 * 60 * 60)); // redondeo hacia arriba
+    
+      return {
+        fecha,
+        inicio: horaInicio,
+        termino: horaTermino,
+        horas: diffHoras
+      };
+    });
+
+    this.filteredData = [...this.filteredData, ...resultado];
+
+  }
+  onPacienteSeleccionado(paciente: any) {
+    this.pacienteSeleccionado = paciente;
+
+    this.form.patchValue({
+      no: this.pacienteSeleccionado.no,
+      nombre: this.pacienteSeleccionado.nombre + ' ' + this.pacienteSeleccionado.apellidos,
+      telefono: this.pacienteSeleccionado.telefono,
+      correoElectronico: this.pacienteSeleccionado.correoElectronico,
+      genero: this.pacienteSeleccionado.genero,
+      peso: this.pacienteSeleccionado.peso,
+      estatura: this.pacienteSeleccionado.estatura,
+    });
+  }
+
+  
   loadData() {
 
     this.isLoading = false;
