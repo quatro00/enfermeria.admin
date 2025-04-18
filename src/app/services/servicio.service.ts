@@ -14,59 +14,8 @@ export class ServicioService {
 
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
-  RegistraServicio(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/RegistraServicio`,request);
+  Crear(request:any):Observable<any>{
+    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
   }
-
-  GetAllServicios():Observable<any>{
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/GetSerrvicios`);
-  }
-
-  GetAllServiciosByEstatus(id:string):Observable<any>{
-    let params = new HttpParams();
-    params = params.append('estatusServicioId', id);
-
-
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/GetSerrvicios`,{params});
-  }
-
-  GetServicio(id:string):Observable<any>{
-    let params = new HttpParams();
-    params = params.append('servicioId', id);
-
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/GetServicio`,{params});
-
-  }
-
-  GetCotizaciones(id:string):Observable<any>{
-    let params = new HttpParams();
-    params = params.append('servicioId', id);
-
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/GetCotizaciones`,{params});
-
-  }
-
-  AsignarGrua(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/AsignarGrua`,request);
-  }
-
-  AsignarCotizacion(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/AsignarCotizacion`,request);
-  }
-
-  CancelarServicio(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/CancelarServicio`,request);
-  }
-
-  SolicitarCotizaciones(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/SolicitarCotizaciones`,request);
-  }
-
-  ColocarEnPropuesta(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/ColocarEnPropuesta`,request);
-  }
-
-  TerminarServicio(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/TerminarServicio`,request);
-  }
+  
 }

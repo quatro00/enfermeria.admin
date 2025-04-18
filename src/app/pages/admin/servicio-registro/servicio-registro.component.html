@@ -21,10 +21,10 @@
     <div nz-col nzXs="24" class="mb-[25px]">
         <!-- New Contact -->
         <div class="flex items-center justify-center md:justify-end">
-         <button class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"  nz-button >
-           <i class="text-[12px]" nz-icon nzType="plus"></i>
-           <span class="m-0">Registrar paciente</span>
-         </button>
+            <button  [routerLink]="['/administrador/paciente-registro']" class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"  nz-button >
+                <i class="text-[12px]" nz-icon nzType="plus"></i>
+                <span class="m-0">Registrar paciente</span>
+              </button>
        </div>
          <!-- end: New Contact -->
       </div>
@@ -187,7 +187,7 @@
                             <nz-form-control nzXs="1" nzErrorTip="Campo requerido.">
                                 <nz-select
                                 class="w-full capitalize [&>nz-select-top-control]:border-regular dark:[&>nz-select-top-control]:border-white/10 [&>nz-select-top-control]:bg-white [&>nz-select-top-control]:dark:bg-white/10 [&>nz-select-top-control]:shadow-none [&>nz-select-top-control]:text-dark [&>nz-select-top-control]:dark:text-white/60 [&>nz-select-top-control]:h-[50px] [&>nz-select-top-control]:flex [&>nz-select-top-control]:items-center [&>nz-select-top-control]:rounded-[6px] [&>nz-select-top-control]:px-[20px] [&>.ant-select-arrow]:text-theme-gray dark:[&>.ant-select-arrow]:text-white/60"
-                                name="enfermedadDiagnosticiada" formControlName="requiereAyudaBasica">
+                                name="enfermedadDiagnosticada" formControlName="enfermedadDiagnosticada">
                                 <nz-option *ngFor="let option of opcionesSiNo" [nzValue]="option.id"
                                     [nzLabel]="option.descripcion"></nz-option>
                             </nz-select>
