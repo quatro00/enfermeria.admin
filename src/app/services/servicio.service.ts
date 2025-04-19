@@ -18,4 +18,42 @@ export class ServicioService {
     return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
   }
   
+  DescargarCotizacion(id: string) {
+    return this.http.get(`${environment.apiBaseUrl}/api/${this.service}/ObtenerCotizacion/${id}`, {
+      responseType: 'blob' // importante para recibir PDF
+    });
+  }
+
+  EnviarCotizacionPorCorreo(id: string, correoAdicional: string) {
+    const url = `${environment.apiBaseUrl}/api/${this.service}/enviar-cotizacion/${id}?correoAdicional=${encodeURIComponent(correoAdicional)}`;
+    return this.http.post(url, null); // null porque no se envía body
+  }
+
+  AplicarDescuento(id: string, monto: string) {
+    const url = `${environment.apiBaseUrl}/api/${this.service}/aplicar-descuento/${id}?monto=${encodeURIComponent(monto)}`;
+    return this.http.post(url, null); // null porque no se envía body
+  }
+
+  GetAll(no?:string, nombrePaciente?:string, estadoId?:string, estatus?:string):Observable<any>{
+    let params = new HttpParams();
+
+    if (no) {
+      params = params.set('No', no);
+    }
+
+    if (nombrePaciente) {
+      params = params.set('NombrePaciente', nombrePaciente);
+    }
+
+    if (estadoId) {
+      params = params.set('Estado', estadoId);
+    }
+
+    if (estatus) {
+      params = params.set('Estatus', estatus);
+    }
+
+
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+  }
 }
