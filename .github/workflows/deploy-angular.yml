@@ -31,3 +31,5 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: dist/enfermeria_admin/
+          exclude: |
+           **/assets/**
