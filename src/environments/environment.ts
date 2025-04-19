@@ -4,10 +4,7 @@
 
 export const environment = {
   production: false,
-  //apiBaseUrl:'https://apidevproveedores.bodesa.com.mx:7678'
   apiBaseUrl:'https://localhost:7070',
-  //apiBaseUrl:'https://quatro0-001-site1.ktempurl.com',
-  
 };
 
 /*

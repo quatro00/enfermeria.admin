@@ -34,6 +34,9 @@ export class ReporteServicioComponent {
 
   isVisibleEnviarCorreo = false;
   isVisibleAplicarDescuento = false;
+  isVisibleVerOfertas = false;
+
+  servicioIdSeleccionado = '';
 
   isLoading = true;
   btnLoading = false;
@@ -270,5 +273,17 @@ export class ReporteServicioComponent {
         }
       });
     }
+  }
+
+  verOfertas(servicioId: string) {
+    this.servicioIdSeleccionado = servicioId;
+    this.isVisibleVerOfertas = true;
+  }
+
+  onOfertaSeleccionada(oferta: any) {
+    console.log('Oferta seleccionada:', oferta);
+  
+    // Aquí puedes manejar lo que quieras hacer con la oferta ganadora
+    // Por ejemplo: asignarla, actualizar estatus, etc.
   }
 }

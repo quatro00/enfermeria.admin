@@ -2,6 +2,9 @@ Generar un nuevo componente administrador
 ng generate component pages/admin/sucursal/sucursal
 ng generate component pages/admin/sucursal/departamento
 
+generar componentes compartidos
+ng generate component pages/admin/components/modal-servicio-ver-ofertas
+
 generar componente mercaderia
 ng generate component pages/responsable/
 
@@ -17,3 +20,16 @@ ltmd cgnj ortf ytaw
 
 --url para crear aplicacion password
 https://myaccount.google.com/u/1/apppasswords
+
+
+---FTP---
+
+--enfermería api
+server: win1123.site4now.net
+user: enfermeria_api
+password: enfermeria_api
+
+--enfermería admin
+server: win1123.site4now.net
+user: enfermeria_admin
+password: enfermeria_admin

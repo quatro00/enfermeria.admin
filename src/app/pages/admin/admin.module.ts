@@ -62,6 +62,7 @@ import { ReportePacientesComponent } from './reporte-pacientes/reporte-pacientes
 import { PacienteRegistroComponent } from './paciente-registro/paciente-registro.component';
 import { ModalPacienteBusquedaComponent } from './components/modal-paciente-busqueda/modal-paciente-busqueda.component';
 import { ModalServicioSeleccionfechaComponent } from './components/modal-servicio-seleccionfecha/modal-servicio-seleccionfecha.component';
+import { ModalServicioVerOfertasComponent } from './components/modal-servicio-ver-ofertas/modal-servicio-ver-ofertas.component';
 
 const antdModule = [
   HotTableModule.forRoot(),
@@ -124,7 +125,8 @@ registerAllModules();
     ReportePacientesComponent,
     PacienteRegistroComponent,
     ModalPacienteBusquedaComponent,
-    ModalServicioSeleccionfechaComponent
+    ModalServicioSeleccionfechaComponent,
+    ModalServicioVerOfertasComponent
   ],
   imports: [
     CommonModule,
