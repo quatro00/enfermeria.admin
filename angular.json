@@ -85,18 +85,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "hexadash:build"
+            "browserTarget": "enfermeria_admin:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "hexadash:build:production"
+              "browserTarget": "enfermeria_admin:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "hexadash:build"
+            "browserTarget": "enfermeria_admin:build"
           }
         },
         "test": {
@@ -133,11 +133,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "hexadash:serve"
+            "devServerTarget": "enfermeria_admin:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "hexadash:serve:production"
+              "devServerTarget": "enfermeria_admin:serve:production"
             }
           }
         }
