@@ -103,6 +103,16 @@ export class ReporteServicioComponent {
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
+      title: 'Por asignar',
+      key: 'guardiasPorAsignar',
+      compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
+    },
+    {
+      title: 'Asignadas',
+      key: 'guardiasAsignadas',
+      compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
+    },
+    {
       title: 'Estatus',
       key: 'estatus',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
@@ -237,7 +247,7 @@ export class ReporteServicioComponent {
   }
 
   BuscaServicios(){
-    console.log(this.formSearch.valid);
+    
     if (this.formSearch.valid) {
       this.btnLoading = true;
       let request = {

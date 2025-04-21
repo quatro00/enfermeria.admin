@@ -3,7 +3,7 @@ ng generate component pages/admin/sucursal/sucursal
 ng generate component pages/admin/sucursal/departamento
 
 generar componentes compartidos
-ng generate component pages/admin/components/modal-servicio-ver-ofertas
+ng generate component pages/admin/components/
 
 generar componente mercaderia
 ng generate component pages/responsable/

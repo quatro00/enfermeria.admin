@@ -1,0 +1,81 @@
+<nz-modal 
+[nzContent]="modalContentDetalle" 
+
+[(nzVisible)]="isVisible" 
+[nzTitle]="'Detalle de ofertas'" 
+[nzFooter]="null"
+(nzOnCancel)="cerrarSegundoModal()" 
+[nzMaskClosable]="true" 
+[nzWidth]="1600">
+
+
+<ng-template #modalContentDetalle>
+  <nz-table #basicTable nzShowSizeChanger [nzData]="filteredData">
+    <thead>
+      <tr>
+        <th
+          class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden [&:first-child]:rounded-s-[10px] [&:last-child]:rounded-e-[10px] capitalize"
+          *ngFor="let column of listOfColumn" [nzSortFn]="column.compare">
+          {{ column.title }}
+        </th>
+        <th
+          class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="group" *ngFor="let item of basicTable.data">
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.colaborador }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.fechaInicio  | date: 'dd/MM/yyyy HH:mm'}}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.fechaTermino | date: 'dd/MM/yyyy HH:mm' }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.telefono }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.correo }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.tipo }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.comentario }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.monto | currency: 'USD':'symbol':'1.2-2' }}</td>
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+          {{ item.fecha  | date: 'dd/MM/yyyy HH:mm' }}</td>
+        
+        <td
+          class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+
+          <table>
+            <tr>
+              <td colspan="3"> <!-- Unificamos la celda para los botones -->
+                <div class="flex gap-0 space-x-0">
+
+                  <button (click)="info(item.id)" nz-tooltip
+                    nz-button
+                    class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[14px] h-[44px]">
+                    Seleccionar
+                  </button>
+
+                </div>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</ng-template>
+
+  
+</nz-modal>

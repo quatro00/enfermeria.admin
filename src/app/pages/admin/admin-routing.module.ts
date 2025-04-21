@@ -13,6 +13,7 @@ import { ServiciosActivosComponent } from './servicios-activos/servicios-activos
 import { PagoRegistroComponent } from './pago-registro/pago-registro.component';
 import { ReportePacientesComponent } from './reporte-pacientes/reporte-pacientes.component';
 import { PacienteRegistroComponent } from './paciente-registro/paciente-registro.component';
+import { ReporteGuardiasComponent } from './reporte-guardias/reporte-guardias.component';
 
 const routes: Routes = [
   {
@@ -58,6 +59,14 @@ const routes: Routes = [
   {
     path: 'reporte-servicio',
     component: ReporteServicioComponent,
+    data: {
+        title: 'Reporte de servicios',
+    },
+    //canActivate: [authAdminGuard]
+  },
+  {
+    path: 'reporte-guardias',
+    component: ReporteGuardiasComponent,
     data: {
         title: 'Reporte de servicios',
     },

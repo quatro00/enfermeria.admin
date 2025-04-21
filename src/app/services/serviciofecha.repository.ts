@@ -20,6 +20,18 @@ export class ServicioFechaService {
     return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/asignar-oferta`,request);
   }
 
+  TerminarOferta(id:string):Observable<any>{
+    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/terminar-oferta`,{});
+  }
+
+  CancelarOferta(id:string):Observable<any>{
+    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/cancelar-oferta`,{});
+  }
+
+  DesasignarOferta(id:string):Observable<any>{
+    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/liberar-oferta`,{});
+  }
+
   Get(servicioId?:string):Observable<any>{
     let params = new HttpParams();
 
@@ -28,5 +40,33 @@ export class ServicioFechaService {
     }
 
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+  }
+
+  GetGuardias(
+    noServicio?:string, 
+    estatusServicioFechaId?:string, 
+    fechaInicio?:any, 
+    fechaFin?:any
+  ):Observable<any>{
+    let params = new HttpParams();
+
+    if (noServicio) {
+      params = params.set('NoServicio', noServicio);
+    }
+
+    if (estatusServicioFechaId) {
+      params = params.set('EstatusServicioFechaId', estatusServicioFechaId);
+    }
+
+    if (fechaInicio) {
+      params = params.set('FechaInicio', fechaInicio);
+    }
+
+    if (fechaFin) {
+      params = params.set('FechaFin', fechaFin);
+    }
+
+
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias`,{params});
   }
 }

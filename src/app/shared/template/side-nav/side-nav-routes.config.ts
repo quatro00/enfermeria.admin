@@ -68,6 +68,14 @@ export const AdminRoutes: SideNavInterface[] = [
         submenu:[]
       },
       {
+        path: 'administrador/reporte-guardias',
+        title: 'Guardias',
+        iconType: 'nzIcon',
+        iconTheme: 'outline',
+        icon: '',
+        submenu:[]
+      },
+      {
         path: 'administrador/reporte-pacientes',
         title: 'Pacientes',
         iconType: 'nzIcon',
