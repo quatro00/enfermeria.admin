@@ -14,7 +14,7 @@ export class ColaboradorService {
 
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
-  Get():Observable<any>{
+  Get(nombre?:string):Observable<any>{
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`);
   }
 

@@ -67,6 +67,7 @@ import { ReporteGuardiasComponent } from './reporte-guardias/reporte-guardias.co
 import { ModalVerOfertasComponent } from './components/modal-ver-ofertas/modal-ver-ofertas.component';
 import { CatalogoEncuestasComponent } from './catalogo-encuestas/catalogo-encuestas.component';
 import { CatalogoEncuestasPreguntasComponent } from './catalogo-encuestas-preguntas/catalogo-encuestas-preguntas.component';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 const antdModule = [
   HotTableModule.forRoot(),
@@ -74,12 +75,14 @@ const antdModule = [
   NzModalModule,
   NzPaginationModule,
   NzDropDownModule,
+  NzAutocompleteModule,
   AngularSvgIconModule.forRoot(),
   NgChartsModule,
   NgApexchartsModule,
   NzLayoutModule,
   NzGridModule,
   NzSkeletonModule,
+  NzAutocompleteModule,
   //FeaturesRoutingModule,
   AdminRoutingModule,
   FormsModule,

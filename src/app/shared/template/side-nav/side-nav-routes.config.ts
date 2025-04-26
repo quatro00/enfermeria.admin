@@ -123,6 +123,30 @@ export const AdminRoutes: SideNavInterface[] = [
         icon: '',
         submenu:[]
       }]
+  },
+  {
+    path: 'administrador/encuestas',
+    title: 'Admin. encuestas',
+    iconType: 'nzIcon',
+    iconTheme: 'outline',
+    icon: '',
+    submenu:[
+      {
+        path: 'administrador/catalogo-encuestas',
+        title: 'Encuestas',
+        iconType: 'nzIcon',
+        iconTheme: 'outline',
+        icon: '',
+        submenu:[]
+      },
+      {
+        path: 'administrador/catalogo-encuestas-pregunta',
+        title: 'Preguntas',
+        iconType: 'nzIcon',
+        iconTheme: 'outline',
+        icon: '',
+        submenu:[]
+      }]
   }
 ]
 

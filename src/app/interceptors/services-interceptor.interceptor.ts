@@ -48,7 +48,7 @@ export class ServicesInterceptorInterceptor implements HttpInterceptor {
             //this.authService.logout();
             break;
           case 400:
-            errorMsg = error.error.errors.error[0];
+            errorMsg = error.error;
             //this.authService.logout();
             break;
           default:

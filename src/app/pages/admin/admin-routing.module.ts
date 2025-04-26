@@ -14,6 +14,8 @@ import { PagoRegistroComponent } from './pago-registro/pago-registro.component';
 import { ReportePacientesComponent } from './reporte-pacientes/reporte-pacientes.component';
 import { PacienteRegistroComponent } from './paciente-registro/paciente-registro.component';
 import { ReporteGuardiasComponent } from './reporte-guardias/reporte-guardias.component';
+import { CatalogoEncuestasComponent } from './catalogo-encuestas/catalogo-encuestas.component';
+import { CatalogoEncuestasPreguntasComponent } from './catalogo-encuestas-preguntas/catalogo-encuestas-preguntas.component';
 
 const routes: Routes = [
   {
@@ -59,6 +61,22 @@ const routes: Routes = [
   {
     path: 'reporte-servicio',
     component: ReporteServicioComponent,
+    data: {
+        title: 'Reporte de servicios',
+    },
+    //canActivate: [authAdminGuard]
+  },
+  {
+    path: 'catalogo-encuestas',
+    component: CatalogoEncuestasComponent,
+    data: {
+        title: 'Reporte de servicios',
+    },
+    //canActivate: [authAdminGuard]
+  },
+  {
+    path: 'catalogo-encuestas-pregunta',
+    component: CatalogoEncuestasPreguntasComponent,
     data: {
         title: 'Reporte de servicios',
     },

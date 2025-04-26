@@ -69,4 +69,33 @@ export class ServicioFechaService {
 
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias`,{params});
   }
+
+  GetServicioFechaFiltros(
+    colaboradorId?:string, 
+    estatusServicioFechaId?:string, 
+    fechaInicio?:any, 
+    fechaFin?:any
+  ):Observable<any>{
+    let params = new HttpParams();
+
+    if (colaboradorId) {
+      params = params.set('ColaboradorAsignadoId', colaboradorId);
+    }
+
+    if (estatusServicioFechaId) {
+      params = params.set('EstatusServicioFechaId', estatusServicioFechaId);
+    }
+
+    if (fechaInicio) {
+      params = params.set('Inicio', fechaInicio);
+    }
+
+    if (fechaFin) {
+      params = params.set('Fin', fechaFin);
+    }
+
+
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias-fechas`,{params});
+  }
+
 }

@@ -1,1 +1,317 @@
-<p>pago-registro works!</p>
+<div nz-row nzGutter="25">
+    <!-- skeleton -->
+    <ng-template #loadingSkeleton>
+        <nz-skeleton class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true"
+            [nzParagraph]="{ rows: 6 }"></nz-skeleton>
+    </ng-template>
+    <!-- skeleton -->
+    <div nz-col nzXs="24">
+        <ng-container *ngIf="showContent; else loadingSkeleton">
+            <div
+                class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative mb-[25px]">
+                <div
+                    class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+                    <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Busqueda</h4>
+                </div>
+                <div class="p-[25px]">
+                    <form [formGroup]="formSearch" nz-form>
+
+                        <nz-form-item>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea2">Colaborador
+                            </nz-form-label>
+                            <nz-form-control nzXs="5">
+                                <input formControlName="colaborador" nz-input [nzAutocomplete]="auto" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10
+                                dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none
+                                placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" />
+                            </nz-form-control>
+
+                            <!-- Autocomplete ------> <!-- 👇 etiqueta el campo a mostrar -->
+                            <nz-autocomplete #auto [nzLabelProperty]="'no'" (selectionChange)="onSeleccion($event)">
+                                <nz-auto-option *ngFor="let o of opcionesFiltradas$ | async"
+                                    [nzValue]="o.no + '|'  + o.nombre + ' ' + o.apellidos">
+                                    {{ o.no + '|' + o.nombre + ' ' + o.apellidos }} <!-- se ve Nombre Apellido -->
+                                </nz-auto-option>
+                            </nz-autocomplete>
+
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea2">&nbsp;&nbsp;&nbsp;&nbsp; Inicio
+                            </nz-form-label>
+                            <nz-form-control nzXs="3">
+                                <input formControlName="inicio" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="date" nz-input>
+                            </nz-form-control>
+
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="2"
+                                nzFor="textarea2">&nbsp;&nbsp;&nbsp;&nbsp; Termino
+                            </nz-form-label>
+                            <nz-form-control nzXs="3">
+                                <input formControlName="termino" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="date" nz-input>
+                            </nz-form-control>
+
+                            <nz-form-control nzXs="2">
+                                <button [nzLoading]="isLoading"
+                                    class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px] ml-auto"
+                                    (click)="Buscar()" nz-button>
+                                    <i class="text-[12px]" nz-icon nzType="search"></i>
+                                    <span class="m-0">Buscar</span>
+                                </button>
+                            </nz-form-control>
+
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div nz-col nzXs="6">
+        <ng-container *ngIf="showContent; else loadingSkeleton">
+            <section
+                class="bg-white dark:bg-white/10 rounded-10 mb-[25px] text-theme-gray dark:text-white/60 text-[15px]">
+                <!-- Encabezado -->
+                <header
+                    class="flex items-center justify-between py-[16px] px-[25px] border-b border-regular dark:border-white/10">
+                    <h4 class="text-lg font-medium text-dark dark:text-white/[.87] mb-0">
+                        Resumen
+                    </h4>
+                </header>
+
+                <!-- Contenido -->
+                <div class="p-[25px] space-y-3">
+                    <!-- Servicios seleccionados -->
+                    <div class="flex justify-between">
+                        <span>Servicios seleccionados</span>
+                        <span class="font-semibold text-dark dark:text-white">
+                            {{ serviciosSeleccionados }}
+                        </span>
+                    </div>
+
+                    <!-- Total de colaboradores -->
+                    <div class="flex justify-between">
+                        <span>Total de colaboradores</span>
+                        <span class="font-semibold text-dark dark:text-white">
+                            {{totalColaboradores}}
+                        </span>
+                    </div>
+
+                    <!-- Monto bruto -->
+                    <div class="flex justify-between">
+                        <span>Monto bruto</span>
+                        <span class="font-semibold text-primary">
+                            {{ montoBruto | currency: 'USD':'symbol':'1.2-2'}}
+                        </span>
+                    </div>
+
+                    <!-- Comisiones -->
+                    <div class="flex justify-between">
+                        <span>Comisiones</span>
+                        <span class="font-semibold text-warning">
+                            {{comisiones| currency: 'USD':'symbol':'1.2-2'}}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Retenciones</span>
+                        <span class="font-semibold text-warning">
+                            {{retenciones| currency: 'USD':'symbol':'1.2-2'}}
+                        </span>
+                    </div>
+
+                    <div class="flex justify-between">
+                        <span>Costos operaivos</span>
+                        <span class="font-semibold text-warning">
+                            {{costoOperativo | currency: 'USD':'symbol':'1.2-2'}}
+                        </span>
+                    </div>
+                    <!-- Monto a transferir -->
+                    <div class="flex justify-between border-t pt-3 mt-2">
+                        <span class="font-medium">Monto a transferir</span>
+                        <span class="font-bold text-success text-[17px]">
+                            {{montoATransferir| currency: 'USD':'symbol':'1.2-2'}}
+                        </span>
+                    </div>
+
+                    <form [formGroup]="formRegistraPago" nz-form>
+
+                        <nz-form-item>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="5"
+                                nzFor="textarea2">Concepto
+                            </nz-form-label>
+                            <nz-form-control nzXs="19" nzErrorTip="Campo requerido.">
+                                <input formControlName="concepto" style="color:white"
+                                    class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                    type="text" nz-input>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="5"
+                                nzFor="textarea2">Periodo
+                            </nz-form-label>
+                            <nz-form-control nzXs="9"  nzErrorTip="Campo requerido.">
+                                <div class="flex gap-4">
+                                    <input formControlName="periodoInicio" type="date"
+                                        class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                        placeholder="Fecha inicio" />
+
+                                  
+                                </div>
+                            </nz-form-control>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <nz-form-control nzXs="9"  nzErrorTip="Campo requerido.">
+                                <div class="flex gap-4">
+                                   
+
+                                    <input   formControlName="periodoFin" type="date"
+                                        class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                                        placeholder="Fecha fin" />
+                                </div>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+
+                    <!-- Botón Generar pagos -->
+                    <div class="flex justify-end pt-4">
+                        <button nz-button [disabled]="serviciosSeleccionados == 0" [nzLoading]="isLoadingGenerarPagos"
+                            class="flex items-center gap-2 bg-primary border-primary text-white px-5 h-10 rounded-md font-semibold"
+                            (click)="generarPagos()">
+                            <i nz-icon nzType="file-done" class="text-[14px]"></i>
+                            Generar pagos
+                        </button>
+                    </div>
+
+                </div>
+            </section>
+        </ng-container>
+    </div>
+
+
+    <div nz-col nzXs="18" class="mb-[25px]">
+        <ng-container *ngIf="showContent; else loadingSkeleton">
+            <div
+                class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative h-full">
+                <div
+                    class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+                    <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Guardias</h4>
+                </div>
+                <div class="p-[25px]" style="padding-top: 0px !important;">
+                    <div>
+
+
+                        <div class="p-[25px]" style="padding-top: 0px !important;">
+
+                            <div
+                                class="flex items-center justify-center w-full mt-5 mb-[25px] max-md:flex-col max-md:justify-center gap-[15px]">
+                                <div class="inline-flex items-center flex-wrap w-full gap-[20px] max-md:justify-center">
+                                </div>
+                                <div class="ssm:min-w-[380px]">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <nz-input-group
+                                                    class="h-10 inline-flex items-center text-body dark:text-white/60 bg-white dark:bg-white/10 border-normal border-1 dark:border-white/10 rounded-[6px] px-[20px]">
+                                                    <i class="text-light dark:text-white/[.87] text-[18px]" nz-icon
+                                                        nzType="search"></i>
+                                                    <input
+                                                        class="bg-transparent border-none text-[15px] shadow-none text-dark dark:text-white/[.87] flex items-center"
+                                                        type="text" nz-input placeholder="Buscar"
+                                                        [(ngModel)]="searchValue" (ngModelChange)="filterItems()" />
+                                                </nz-input-group>
+                                            </td>
+                                            <td>
+                                                <button nz-button (click)="exportToExcel()">Exportar a Excel</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="w-full overflow-x-auto">
+                                <nz-table #basicTable nzShowSizeChanger [nzData]="filteredData">
+                                    <thead>
+                                        <tr>
+                                            <th class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden [&:first-child]:rounded-s-[10px] [&:last-child]:rounded-e-[10px] capitalize"
+                                                *ngFor="let column of listOfColumn" [nzSortFn]="column.compare">
+                                                {{ column.title }}
+                                            </th>
+                                            <th
+                                                class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="group" *ngFor="let item of basicTable.data">
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.colaborador }}</td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.inicio | date:'dd/MM/yyyy HH:mm'}}</td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.termino | date:'dd/MM/yyyy HH:mm'}}</td>
+
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.horas }}</td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.importeBruto | currency: 'USD':'symbol':'1.2-2'}}</td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.comision | currency: 'USD':'symbol':'1.2-2'}}
+                                            </td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.retenciones | currency: 'USD':'symbol':'1.2-2'}}
+                                            </td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.costosOperativos | currency: 'USD':'symbol':'1.2-2'}}
+                                            </td>
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                {{ item.total | currency: 'USD':'symbol':'1.2-2'}}
+                                            </td>
+
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                                                <span
+                                                    class="inline-flex items-center justify-center bg-active/10 text-active min-h-[24px] px-3 text-xs font-medium rounded-[15px] capitalize">{{
+                                                    item.estatusServicioFecha }}</span>
+                                            </td>
+
+                                            <td
+                                                class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+
+                                                <button (click)="item.pago = true; calculaTotales();" nz-tooltip
+                                                    *ngIf="item.pago === false || item.pago == null"
+                                                    nzTooltipTitle="Marcar pago" nz-button
+                                                    class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
+                                                    <span class="text-[14px]" nz-icon nzType="check"
+                                                        nzTheme="outline"></span>
+                                                </button>
+
+
+                                                <button (click)="item.pago = false; calculaTotales();" nz-tooltip
+                                                    *ngIf="item.pago === true" nzTooltipTitle="Cancelar pago" nz-button
+                                                    class="bg-danger/10 hover:bg-danger-hbr border-none text-danger hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
+                                                    <span class="text-[14px]" nz-icon nzType="stop"
+                                                        nzTheme="outline"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </nz-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+</div>
