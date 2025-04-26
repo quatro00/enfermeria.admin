@@ -1,141 +1,321 @@
-<!-- Lotes de Pagos usando Angular Material -->
-<div class="p-6">
-  <mat-card class="mb-6">
-    <mat-card-title>Lotes de Pago</mat-card-title>
-    <div class="overflow-auto">
-      <table mat-table [dataSource]="lotes" class="mat-elevation-z8 w-full">
+<nz-modal [nzMaskClosable]="false"  [(nzVisible)]="isVisibleAdjuntarDocumento" [nzTitle]="modalTitleAdjuntarDocumento"
+  [nzContent]="modalContentAdjuntarDocumento" [nzFooter]="modalFooterAdjuntarDocumento" (nzOnCancel)="cerrarModalAdjuntarDocumento()">
+  <ng-template #modalTitleAdjuntarDocumento>Adjuntar documento</ng-template>
 
-        <!-- ID Lote -->
-        <ng-container matColumnDef="idLote">
-          <th mat-header-cell *matHeaderCellDef> ID Lote </th>
-          <td mat-cell *matCellDef="let lote"> {{lote.idLote}} </td>
-        </ng-container>
+  <ng-template #modalContentAdjuntarDocumento>
+    <form nz-form [formGroup]="formAdjuntarDocumento">
+      <nz-form-item class="mb-[25px]">
+          <nz-form-label style="text-align: left;" nzXs="6"
+              class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Referencia</nz-form-label>
+          <nz-form-control nzXs="18" nzErrorTip="Campo requerido.">
+              <input formControlName="referencia" style="color:white"
+                  class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                  type="text" nz-input>
+          </nz-form-control>
+      </nz-form-item>
 
-        <!-- Fecha -->
-        <ng-container matColumnDef="fecha">
-          <th mat-header-cell *matHeaderCellDef> Fecha de creación </th>
-          <td mat-cell *matCellDef="let lote"> {{lote.fecha}} </td>
-        </ng-container>
+      <nz-form-item class="mb-[25px]">
+        <nz-form-label style="text-align: left;" nzXs="6"
+            class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Importe</nz-form-label>
+        <nz-form-control nzXs="18" nzErrorTip="Campo requerido.">
+            <input formControlName="importe" style="color:white"
+                class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                type="number" nz-input>
+        </nz-form-control>
+    </nz-form-item>
 
-        <!-- Total -->
-        <ng-container matColumnDef="total">
-          <th mat-header-cell *matHeaderCellDef> Total del Lote </th>
-          <td mat-cell *matCellDef="let lote"> {{lote.total | currency}} </td>
-        </ng-container>
+    <nz-form-item class="mb-[25px]">
+      <nz-form-label style="text-align: left;" nzXs="6"
+          class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Documento</nz-form-label>
+      <nz-form-control nzXs="18" nzErrorTip="Campo requerido.">
+        <nz-upload
+        class="w-full"
+        [nzBeforeUpload]="beforeUploadDocumento"
+        [nzShowUploadList]="false">
+        <button nz-button
+          class="text-theme-gray dark:text-white/60 flex capitalize items-center justify-between h-[50px] border-normal border-1 dark:border-white/10 rounded-4 px-[20px] py-5px w-full">
+          <span>{{documentoTitulo}}</span>
+          <span class="flex items-center h-full ltr:border-l-1 rtl:border-r-1 border-normal dark:border-white/10 ps-[25px]">
+            Buscar
+          </span>
+        </button>
+      </nz-upload>
+      </nz-form-control>
+  </nz-form-item>
 
-        <!-- Numero de Pagos -->
-        <ng-container matColumnDef="numPagos">
-          <th mat-header-cell *matHeaderCellDef> Número de Pagos </th>
-          <td mat-cell *matCellDef="let lote"> {{lote.numPagos}} </td>
-        </ng-container>
 
-        <!-- Estatus -->
-        <ng-container matColumnDef="estatus">
-          <th mat-header-cell *matHeaderCellDef> Estatus </th>
-          <td mat-cell *matCellDef="let lote">
-            <span [ngClass]="{
-              'bg-green-100 text-green-800 px-2 py-1 rounded': lote.estatus === 'Procesado',
-              'bg-yellow-100 text-yellow-800 px-2 py-1 rounded': lote.estatus === 'En Revisión',
-              'bg-red-100 text-red-800 px-2 py-1 rounded': lote.estatus === 'Cancelado'
-            }">
-              {{lote.estatus}}
-            </span>
-          </td>
-        </ng-container>
 
-        <!-- Acciones -->
-        <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let lote">
-            <button mat-button color="primary">Ver Detalles</button>
-          </td>
-        </ng-container>
+  </form>
+  </ng-template>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <ng-template #modalFooterAdjuntarDocumento>
+    <button
+      class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
+      nz-button nzType="primary" (click)="guardarAdjuntarDocumento()" [nzLoading]="isLoadingAdjuntarDocumentoe">Guardar</button>
+  </ng-template>
+</nz-modal>
 
-        <!-- Totales -->
-        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
-      </table>
-      <div class="text-right p-4 font-bold">
-        Total General: 0
+
+<div nz-row nzGutter="25">
+  <!-- skeleton -->
+  <ng-template #loadingSkeleton>
+    <nz-skeleton class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true"
+      [nzParagraph]="{ rows: 6 }"></nz-skeleton>
+  </ng-template>
+  <!-- skeleton -->
+
+  <div nz-col nzXs="6">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+      <div
+        class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative mb-[25px]">
+        <div
+          class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+          <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Busqueda</h4>
+        </div>
+        <div class="p-[25px]">
+          <form [formGroup]="formBusqueda" nz-form>
+            <nz-form-item class="mb-[25px]">
+              <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="6"
+                nzFor="textarea1">Estatus
+              </nz-form-label>
+              <nz-form-control nzXs="18">
+                <nz-select class="basic-select" name="basicSelect" formControlName="estatusPagoLote">
+                  <nz-option *ngFor="let option of estatusPagoLote" [nzLabel]="option.descripcion"
+                    [nzValue]="option.id">
+                  </nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label class="flex items-center font-medium dark:text-white/60 mb-[10px]" nzXs="6"
+                nzFor="textarea2">Periodo
+              </nz-form-label>
+              <nz-form-control nzXs="18">
+                <input formControlName="periodo" style="color:white"
+                  class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60"
+                  type="month" nz-input>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+
+              <nz-form-control nzXs="19"></nz-form-control>
+              <nz-form-control nzXs="4">
+                <button [nzLoading]="isLoading"
+                  class="flex items-center px-[14px] text-sm text-white rounded-md font-semibold bg-primary border-primary h-10 gap-[6px]"
+                  (click)="buscarPagos()" nz-button>
+                  <i class="text-[12px]" nz-icon nzType="search"></i>
+                  <span class="m-0">Buscar</span>
+                </button>
+              </nz-form-control>
+
+
+            </nz-form-item>
+          </form>
+        </div>
       </div>
-    </div>
-  </mat-card>
+    </ng-container>
+  </div>
+  <div nz-col nzXs="18" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+      <div
+        class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative h-full">
+        <div
+          class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+          <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Pagos</h4>
+        </div>
+        <div class="p-[25px]" style="padding-top: 0px !important;">
+          <div>
+            <div class="p-[25px]" style="padding-top: 0px !important;">
+              
+              <div class="w-full overflow-x-auto">
+                <nz-table #basicTable nzShowSizeChanger [nzData]="filteredData">
+                  <thead>
+                    <tr>
+                      <th
+                        class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden [&:first-child]:rounded-s-[10px] [&:last-child]:rounded-e-[10px] capitalize"
+                        *ngFor="let column of listOfColumn" [nzSortFn]="column.compare">
+                        {{ column.title }}
+                      </th>
+                      <th
+                        class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="group" *ngFor="let item of basicTable.data">
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.no }}</td>
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.fechaCreacion | date:'dd/MM/yyyy' }}</td>
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.totalLote | currency: 'USD':'symbol':'1.2-2' }}</td>
 
-  <!-- Pagos en el Lote -->
-  <mat-card>
-    <mat-card-title>Pagos en el Lote Seleccionado</mat-card-title>
-    <div class="overflow-auto">
-      <table mat-table [dataSource]="pagos" class="mat-elevation-z8 w-full">
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.numeroPagos }}</td>
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.colaboradores }}</td>
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
 
-        <!-- Columnas -->
-        <ng-container matColumnDef="idPago">
-          <th mat-header-cell *matHeaderCellDef> ID Pago </th>
-          <td mat-cell *matCellDef="let pago"> {{pago.idPago}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="folio">
-          <th mat-header-cell *matHeaderCellDef> Folio / Referencia </th>
-          <td mat-cell *matCellDef="let pago"> {{pago.folio}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="beneficiario">
-          <th mat-header-cell *matHeaderCellDef> Beneficiario </th>
-          <td mat-cell *matCellDef="let pago"> {{pago.beneficiario}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="monto">
-          <th mat-header-cell *matHeaderCellDef> Monto </th>
-          <td mat-cell *matCellDef="let pago"> {{pago.monto | currency}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="fechaPago">
-          <th mat-header-cell *matHeaderCellDef> Fecha del Pago </th>
-          <td mat-cell *matCellDef="let pago"> {{pago.fechaPago}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="estatusPago">
-          <th mat-header-cell *matHeaderCellDef> Estatus del Pago </th>
-          <td mat-cell *matCellDef="let pago">
-            <span [ngClass]="{
-              'bg-green-100 text-green-800 px-2 py-1 rounded': pago.estatusPago === 'Pagado',
-              'bg-yellow-100 text-yellow-800 px-2 py-1 rounded': pago.estatusPago === 'Pendiente',
-              'bg-red-100 text-red-800 px-2 py-1 rounded': pago.estatusPago === 'Fallido'
-            }">
-              {{pago.estatusPago}}
-            </span>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedPagos"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedPagos;"></tr>
-      </table>
-      <div class="text-right p-4 font-bold">
-        Total de Pagos: {{ pagos.reduce((acc, item) => acc + item.monto, 0) | currency }}
+                        <span
+                          class="inline-flex items-center justify-center bg-active/10 text-active min-h-[24px] px-3 text-xs font-medium rounded-[15px] capitalize">
+                          {{ item.estatusPagoLote }}
+                        </span>
+                      </td>
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        <button (click)="verDetalle(item)" nz-tooltip nzTooltipTitle="Ver detalle" nz-button
+                          class="bg-primary/10 hover:bg-primary-hbr border-none text-primary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
+                          <span class="text-[14px]" nz-icon nzType="search" nzTheme="outline"></span>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </mat-card>
+    </ng-container>
+  </div>
+
+
+  <div nz-col nzXs="12" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+      <div
+        class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative h-full">
+        <div
+          class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+          <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Depositos {{ pagoSeleccionado}}</h4>
+        </div>
+        <div class="p-[25px]" style="padding-top: 0px !important;">
+          <div>
+            <div class="p-[25px]" style="padding-top: 0px !important;">
+             
+              <div class="w-full overflow-x-auto">
+                <nz-table #basicTable nzShowSizeChanger [nzData]="filteredDataDepositos">
+                  <thead>
+                    <tr>
+                      <th
+                        class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden [&:first-child]:rounded-s-[10px] [&:last-child]:rounded-e-[10px] capitalize"
+                        *ngFor="let column of listOfColumnDepositos" [nzSortFn]="column.compare">
+                        {{ column.title }}
+                      </th>
+                      <th
+                        class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-start text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden capitalize">
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="group" *ngFor="let item of basicTable.data">
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.banco }}</td>
+                        <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.clabe }}</td>
+
+                        <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.beneficiario }}</td>
+
+                        <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.monto | currency: 'USD':'symbol':'1.2-2' }}</td>
+
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        <button *ngIf="item.pagado === 1" (click)="adjuntarPago(item)" nz-tooltip nzTooltipTitle="Adjuntar pago" nz-button
+                          class="bg-primary/10 hover:bg-primary-hbr border-none text-primary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
+                          <span class="text-[14px]" nz-icon nzType="upload" nzTheme="outline"></span>
+                        </button>
+
+                        <button *ngIf="item.pagado === 2" (click)="descargarPago(item)" nz-tooltip nzTooltipTitle="Descargar pago" nz-button
+                          class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
+                          <span class="text-[14px]" nz-icon nzType="download" nzTheme="outline"></span> {{ item.referencia }}
+                        </button>
+
+                      </td>
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div nz-col nzXs="12" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+      <div
+        class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative h-full">
+        <div
+          class="py-[16px] px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] border-regular dark:border-white/10 border-b">
+          <h4 class="mb-0 text-lg font-medium text-dark dark:text-white/[.87]">Detalle de pago {{ pagoSeleccionado}}</h4>
+        </div>
+        <div class="p-[25px]" style="padding-top: 0px !important;">
+          <div>
+            <div class="p-[25px]" style="padding-top: 0px !important;">
+             
+              <div class="w-full overflow-x-auto">
+                <nz-table #basicTable nzShowSizeChanger [nzData]="filteredDataDetalle">
+                  <thead>
+                    <tr>
+                      <th
+                        class="bg-regularBG dark:bg-[#323440] px-[20px] py-[16px] text-dark dark:text-white/[.87] text-[15px] font-medium border-none before:hidden [&:first-child]:rounded-s-[10px] [&:last-child]:rounded-e-[10px] capitalize"
+                        *ngFor="let column of listOfColumnDetalle" [nzSortFn]="column.compare">
+                        {{ column.title }}
+                      </th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="group" *ngFor="let item of basicTable.data">
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.no }}</td>
+                        <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.referencia }}</td>
+
+                        <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.beneficiario }}</td>
+
+                        <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.monto | currency: 'USD':'symbol':'1.2-2' }}</td>
+
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+                        {{ item.fechaPago | date:'dd/MM/yyyy' }}</td>
+                     
+                      <td
+                        class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
+
+                        <span
+                          class="inline-flex items-center justify-center bg-active/10 text-active min-h-[24px] px-3 text-xs font-medium rounded-[15px] capitalize">
+                          {{ item.estatusPago }}
+                        </span>
+                      </td>
+                     
+                    </tr>
+                  </tbody>
+                </nz-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
 </div>
-
-<!-- Dummy Data en el componente -->
-<script>
-  export class PagosComponent {
-    displayedColumns = ['idLote', 'fecha', 'total', 'numPagos', 'estatus', 'acciones'];
-    displayedPagos = ['idPago', 'folio', 'beneficiario', 'monto', 'fechaPago', 'estatusPago'];
-
-    lotes = [
-      { idLote: 1, fecha: '2024-04-01', total: 5400, numPagos: 3, estatus: 'Procesado' },
-      { idLote: 2, fecha: '2024-04-05', total: 7250, numPagos: 4, estatus: 'En Revisión' },
-      { idLote: 3, fecha: '2024-04-09', total: 3100, numPagos: 1, estatus: 'Cancelado' },
-      { idLote: 4, fecha: '2024-04-15', total: 4800, numPagos: 2, estatus: 'Procesado' }
-    ];
-
-    pagos = [
-      { idPago: 101, folio: 'A12345', beneficiario: 'Juan Perez', monto: 1500, fechaPago: '2024-04-01', estatusPago: 'Pagado' },
-      { idPago: 102, folio: 'B67890', beneficiario: 'María Gómez', monto: 2300, fechaPago: '2024-04-02', estatusPago: 'Pagado' },
-      { idPago: 103, folio: 'C45678', beneficiario: 'Carlos Ruiz', monto: 1200, fechaPago: '2024-04-03', estatusPago: 'Pendiente' },
-      { idPago: 104, folio: 'D98755', beneficiario: 'Ana López', monto: 400, fechaPago: '2024-04-04', estatusPago: 'Fallido' }
-    ];
-  }
-</script>

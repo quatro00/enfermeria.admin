@@ -18,5 +18,31 @@ export class PagoLoteService {
     return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
   }
 
-  
+  GetPagoLote(periodo?:any, estatusPagoLote?:any):Observable<any>{
+    let params = new HttpParams();
+
+    if(periodo != null)
+    params = params.append('Periodo', periodo);
+   
+    if(estatusPagoLote != null)
+      params = params.append('EstatusPagoLoteId', estatusPagoLote);
+
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+  }
+
+  SubirDeposito(formData: FormData): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}/api/${this.service}/subir-deposito`,formData);
+  }
+
+  DescargarDeposito(pagoLoteId: string, referencia:string) {
+
+    const params = new HttpParams()
+    .set('pagoLoteId', pagoLoteId)
+    .set('referencia', referencia);
+
+    return this.http.get(`${environment.apiBaseUrl}/api/${this.service}/descargar-deposito`, {
+    params,
+    responseType: 'blob'
+  });
+  }
 }

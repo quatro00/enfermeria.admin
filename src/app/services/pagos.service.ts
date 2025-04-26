@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PagosService {
 
-  service:string = 'Pagos';
+  service:string = 'Pago';
   
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
@@ -26,4 +26,21 @@ export class PagosService {
   RegistrarPagoServicios(request:any):Observable<any>{
     return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/RegistrarPagoServicios`,request);
   }
+
+  GetPagos(pagoLoteId?:string):Observable<any>{
+    let params = new HttpParams();
+    params = params.append('PagoLoteId', pagoLoteId);
+
+    console.log(pagoLoteId);
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`, {params});
+  }
+
+  GetDepositos(pagoLoteId?:string):Observable<any>{
+    let params = new HttpParams();
+    params = params.append('PagoLoteId', pagoLoteId);
+
+    console.log(pagoLoteId);
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/ver-depositos`, {params});
+  }
+
 }

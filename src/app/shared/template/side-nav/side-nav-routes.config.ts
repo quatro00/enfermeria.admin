@@ -12,6 +12,7 @@ export const AdminRoutes: SideNavInterface[] = [
     icon: '',
     submenu:[]
   },
+  /*
   {
     path: 'administrador/servicios-activos',
     title: 'Servicios activos',
@@ -20,6 +21,7 @@ export const AdminRoutes: SideNavInterface[] = [
     icon: '',
     submenu:[]
   },
+  */
   {
     path: 'administrador/paciente-registro',
     title: 'Registrar paciente',
