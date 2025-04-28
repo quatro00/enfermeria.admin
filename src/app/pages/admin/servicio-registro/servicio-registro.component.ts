@@ -178,7 +178,6 @@ export class ServicioRegistroComponent {
       this.servicioService.Crear(request)
       .subscribe({
         next: (response) => {
-          console.log(response);
         },
         complete: () => {
           this.isLoading = false;

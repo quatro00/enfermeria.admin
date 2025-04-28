@@ -279,7 +279,6 @@ export class ModalServicioVerOfertasComponent {
     this.servicioFechaService.Get(this.servicioId)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.fechasServicio = response;
 
           const eventos: EventInput[] = response.map(ev => ({
@@ -297,7 +296,6 @@ export class ModalServicioVerOfertasComponent {
             //textColor: this.getClasePorEstatus(ev.estatusServicioFecha) // an option!
           }));
 
-          console.log(eventos);
           const calendarApi = this.calendarComponent.getApi();
           calendarApi.removeAllEvents(); // limpia anteriores
           calendarApi.addEventSource(eventos); // agrega los nuevos
@@ -325,16 +323,13 @@ export class ModalServicioVerOfertasComponent {
 
   // Función para manejar el clic en un día
   onDateClick(arg: any): void {
-    console.log('Fecha clickeada:', arg);
     // Guardamos la fecha seleccionada
     this.selectedDate = arg.dateStr;
-    console.log('Fecha seleccionada:', this.selectedDate);
   }
 
 
   handleDateSelect(selectInfo: DateSelectArg) {
     this.abrirSegundoModal();
-    console.log(selectInfo.view.calendar);
     /*
     const title = prompt('Please enter a new title for your event');
     const calendarApi = selectInfo.view.calendar;
@@ -375,7 +370,6 @@ export class ModalServicioVerOfertasComponent {
       nzTitle: '<h2 class="text-dark dark:text-white/[.87]"> Mensaje de confirmación</h2>',
       nzContent: '<p class="text-theme-gray dark:text-white/60">Deseas asignar la oferta seleccionada?</p>',
       nzOnOk: () => {
-        console.log(this.servicioFechaSeleccionada, servicioFechasOfertaId);
         this.servicioFechaService.AsignarOferta(this.servicioFechaSeleccionada, { ServicioFechasOfertaId: servicioFechasOfertaId })
           .subscribe({
             next: (response) => {

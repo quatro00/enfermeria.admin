@@ -30,7 +30,6 @@ export class AuthService {
   }
   
   setUser(user:UserModel):void{
-    console.log('guardamos usuario',user);
     this.$user.next(user);
     localStorage.setItem('user-email',user.email);
     localStorage.setItem('user-username',user.username);

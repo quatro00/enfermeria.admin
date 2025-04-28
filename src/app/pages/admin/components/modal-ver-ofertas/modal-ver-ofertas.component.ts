@@ -162,7 +162,6 @@ export class ModalVerOfertasComponent {
   ) { }
 
   ngOnInit() {
-    console.log(this.servicioFechasId);
     if (this.servicioFechasId) {
       this.busarOfertas();
     }

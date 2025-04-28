@@ -110,7 +110,6 @@ export class ReporteGuardiasComponent {
   
 
   onOfertaSeleccionada(item){
-    console.log('buscamos');
     this.Buscar();
   }
 
@@ -134,7 +133,6 @@ export class ReporteGuardiasComponent {
       nzTitle: '<h2 class="text-dark dark:text-white/[.87]"> Terminación de guardia</h2>',
       nzContent: '<p class="text-theme-gray dark:text-white/60">Deseas terminar la guardia seleccionada?</p>',
       nzOnOk: () => {
-        console.log(item);
         this.servicioFechaService.TerminarOferta(item)
           .subscribe({
             next: (response) => {
@@ -157,7 +155,6 @@ export class ReporteGuardiasComponent {
       nzTitle: '<h2 class="text-dark dark:text-white/[.87]"> Liberación de guardia</h2>',
       nzContent: '<p class="text-theme-gray dark:text-white/60">Deseas liberar la guardia seleccionada?</p>',
       nzOnOk: () => {
-        console.log(item);
         this.servicioFechaService.DesasignarOferta(item)
           .subscribe({
             next: (response) => {
@@ -180,7 +177,6 @@ export class ReporteGuardiasComponent {
       nzTitle: '<h2 class="text-dark dark:text-white/[.87]"> Cancelación de guardia</h2>',
       nzContent: '<p class="text-theme-gray dark:text-white/60">Deseas cancelar la guardia seleccionada?</p>',
       nzOnOk: () => {
-        console.log(item);
         this.servicioFechaService.CancelarOferta(item)
           .subscribe({
             next: (response) => {
@@ -211,7 +207,6 @@ export class ReporteGuardiasComponent {
       )
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.data = response;
           this.filteredData = response;
           this.loadData();

@@ -345,7 +345,7 @@ export class ColaboradoresComponent {
             
           },
           error: (err) => {
-            console.log(err);
+            //console.log(err);
             this.msg.error('Ocurrio un error al activar el articulo.');
           }
     })

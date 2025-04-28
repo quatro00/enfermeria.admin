@@ -200,7 +200,7 @@ isVisible = false;
     this.id = item.id;
     this.editar = true;
 
-    console.log(item);
+    //console.log(item);
     this.formNuevaPregunta.patchValue({
       plantillaId: this.form.value.encuesta,
       orden: item.orden,

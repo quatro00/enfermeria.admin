@@ -31,7 +31,6 @@ export class PagosService {
     let params = new HttpParams();
     params = params.append('PagoLoteId', pagoLoteId);
 
-    console.log(pagoLoteId);
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`, {params});
   }
 
@@ -39,7 +38,6 @@ export class PagosService {
     let params = new HttpParams();
     params = params.append('PagoLoteId', pagoLoteId);
 
-    console.log(pagoLoteId);
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/ver-depositos`, {params});
   }
 

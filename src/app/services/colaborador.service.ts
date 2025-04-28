@@ -19,7 +19,6 @@ export class ColaboradorService {
   }
 
   GetColaboradores(request:any):Observable<any>{
-    console.log(request);
     return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/GetColaboradores`,request);
   }
 

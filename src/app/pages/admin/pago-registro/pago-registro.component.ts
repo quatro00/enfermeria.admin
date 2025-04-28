@@ -208,7 +208,6 @@ export class PagoRegistroComponent {
 
 
   generarPagos(){
-    console.log('pagos');
     if (this.formRegistraPago.valid) {
       this.isLoadingGenerarPagos = true;
       const activos = this.filteredData.filter(item => item.pago === true);
@@ -235,7 +234,6 @@ export class PagoRegistroComponent {
           this.msg.success('Pago creado correctamente.');
         },
         error: (err) => {
-          console.log('ERROR!!',err);
           this.isLoadingGenerarPagos = false;
           //this.msg.error(err.error);
         }
@@ -275,7 +273,6 @@ export class PagoRegistroComponent {
       )
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.data = response;
           this.filteredData = response;
           this.calculaTotales();

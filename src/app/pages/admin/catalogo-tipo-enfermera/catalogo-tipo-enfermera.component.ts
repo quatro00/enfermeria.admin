@@ -133,7 +133,7 @@ export class CatalogoTipoEnfermeraComponent {
         this.tipoEnfermeraService.Get()
       ]).subscribe({
         next: ([estadoResponse]) => {
-          console.log(estadoResponse);
+          //(estadoResponse);
           this.data = estadoResponse;
           this.filteredData = estadoResponse;
         },

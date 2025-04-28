@@ -282,7 +282,6 @@ export class ReportePagosComponent {
     this.pagoService.GetPagos(item.id)
     .subscribe({
       next: (response) => {
-        console.log(response);
         this.filteredDataDetalle = response;
         this.dataDetalle = response;
       },
@@ -297,7 +296,6 @@ export class ReportePagosComponent {
     this.pagoService.GetDepositos(item.id)
     .subscribe({
       next: (response) => {
-        console.log('Depositos',response);
         this.filteredDataDepositos = response;
         this.dataDepositos = response;
       },
@@ -313,13 +311,10 @@ export class ReportePagosComponent {
   buscarPagos(){
     if (this.formBusqueda.valid) {
       this.isLoading = true;
-      console.log(this.formBusqueda.value.periodo);
-      console.log(this.formBusqueda.value.estatusPagoLote);
 
       this.pagoLoteService.GetPagoLote(this.formBusqueda.value.periodo,this.formBusqueda.value.estatusPagoLote)
     .subscribe({
       next: (response) => {
-        console.log(response);
         this.data = response;
         this.filteredData = response;
 

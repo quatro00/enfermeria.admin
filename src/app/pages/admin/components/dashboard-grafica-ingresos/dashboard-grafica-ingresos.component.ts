@@ -88,7 +88,7 @@ export class DashboardGraficaIngresosComponent {
     .subscribe({
       next: (response:any) => {
 
-        console.log(response);
+       // console.log(response);
         this.chartOptions3 = {
           title:{
           },

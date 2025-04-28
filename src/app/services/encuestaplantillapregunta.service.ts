@@ -20,7 +20,6 @@ export class EncuestaPlantillaPreguntaService {
 
   GetAll(id):Observable<any>{
     let params = new HttpParams();
-    console.log(id);
     params = params.set('plantillaId', id);
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,{});
   }

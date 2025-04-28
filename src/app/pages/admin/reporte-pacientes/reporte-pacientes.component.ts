@@ -473,7 +473,6 @@ export class ReportePacientesComponent {
       this.pacienteService.GetAll(nombre, correoElectronico)
       .subscribe({
         next: (response) => {
-          console.log(response.result);
           this.data = response.result;
         this.filteredData = response.result;
           this.loadData();

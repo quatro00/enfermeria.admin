@@ -41,13 +41,13 @@ export class Login1Component {
           concatMap(() => this.msg.info('Loading finished is finished', { nzDuration: 2500 }).onClose!)
         )
         .subscribe(() => {
-          console.log('All completed!');
+          //console.log('All completed!');
         });
         */
     }
 
     habilitaBtn(){
-      console.log(this.loadingbtn_Entrar);
+      //console.log(this.loadingbtn_Entrar);
     }
   submitForm(): void {
     this.loadingbtn_Entrar = true;

@@ -140,7 +140,7 @@ export class ModalPacienteBusquedaComponent {
       this.pacienteService.GetAll(this.form.value.nombreCorreo, '')
       .subscribe({
         next: (response) => {
-          console.log(response.result);
+          //.log(response.result);
           this.data = response.result;
         this.filteredData = response.result;
           //this.loadData();

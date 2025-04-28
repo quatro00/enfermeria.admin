@@ -39,7 +39,7 @@ export class ServicesInterceptorInterceptor implements HttpInterceptor {
         return event;
       }),
       catchError((error: any) => {
-        console.log('error--->>>', error);
+        //console.log('error--->>>', error);
         var tipoError: number = error.status;
         var errorMsg: string = '';
         switch (tipoError) {

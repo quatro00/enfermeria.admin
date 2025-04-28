@@ -260,7 +260,6 @@ export class ReporteServicioComponent {
       this.servicioService.GetAll(request.noServicio, request.nombrePaciente, request.estado, request.estatus)
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.data = response;
           this.filteredData = response;
           this.loadData();
@@ -291,7 +290,6 @@ export class ReporteServicioComponent {
   }
 
   onOfertaSeleccionada(oferta: any) {
-    console.log('Oferta seleccionada:', oferta);
   
     // Aquí puedes manejar lo que quieras hacer con la oferta ganadora
     // Por ejemplo: asignarla, actualizar estatus, etc.

@@ -39,6 +39,7 @@ export class DashboardIndicadoresComponent {
     this.dashboardService.GetIndicadores()
       .subscribe({
         next: (response) => {
+          //console.log('indicadores',response);
           this.indicadores = response;
           this.showContent = true;
         },
