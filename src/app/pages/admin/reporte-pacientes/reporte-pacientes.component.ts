@@ -104,7 +104,7 @@ export class ReportePacientesComponent {
     },
     {
       title: 'Sexo',
-      key: 'sexo',
+      key: 'genero',
       compare: (a: any, b: any) => a.estatusContratoMantenimientoId.localeCompare(b.estatusContratoMantenimientoId)
     },
     {
@@ -144,7 +144,7 @@ export class ReportePacientesComponent {
     },
     {
       title: 'Descripción',
-      key: 'descripcion',
+      key: 'descripcionDiscapacidad',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
   ];
@@ -473,6 +473,13 @@ export class ReportePacientesComponent {
       this.pacienteService.GetAll(nombre, correoElectronico)
       .subscribe({
         next: (response) => {
+          
+
+          response.result.forEach(item => {
+            // Usa la propiedad `key` para acceder al valor en `item`
+            item.edad = this.calcularEdad(item.fechaNacimiento);
+          });
+
           this.data = response.result;
         this.filteredData = response.result;
           this.loadData();

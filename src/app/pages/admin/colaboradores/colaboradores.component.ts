@@ -91,7 +91,7 @@ export class ColaboradoresComponent {
     },
     {
       title: 'Estados',
-      key: 'estados',
+      key: 'estadosConcat',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
@@ -251,9 +251,10 @@ export class ColaboradoresComponent {
       data2.correoElectronico.toLowerCase().includes(this.searchValue.toLowerCase()) ||
       data2.rfc.toLowerCase().includes(this.searchValue.toLowerCase()) ||
       data2.curp.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-      data2.cedula.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-      data2.domicilio.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      data2.cedulaProfesional.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      data2.domicilioCalle.toLowerCase().includes(this.searchValue.toLowerCase()) ||
       data2.estatus.toLowerCase().includes(this.searchValue.toLowerCase())
+      
     );
   }
 
@@ -276,7 +277,14 @@ export class ColaboradoresComponent {
       this.colaboradoresService.GetColaboradores(request)
         .subscribe({
           next: (response) => {
-            
+            console.log(response);
+            response.forEach(item => {
+              // Usa la propiedad `key` para acceder al valor en `item`
+              item.domicilio = item.domicilioCalle + ' ' + item.domicilioNumero +', ' + item.colonia;
+              item.estadosConcat = item.estados.join(', ')
+            });
+
+            console.log(response);
             this.data = response;
             this.filteredData = response;
           },

@@ -310,10 +310,10 @@
                         {{ item.cedulaProfesional }}</td>
                       <td
                         class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                        {{ item.domicilioCalle }} {{ item.domicilioNumero }}, {{ item.colonia }}</td>
+                        {{ item.domicilio }}</td>
                       <td
                         class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">
-                        <div *ngFor="let estado of item.estados">{{ estado }}</div>
+                        {{ item.estadosConcat }}
                       </td>
                       <td
                         class="ltr:pr-[20px] rtl:pl-[20px] text-dark dark:text-white/[.87] text-[15px] py-4 before:hidden border-none group-hover:bg-transparent">

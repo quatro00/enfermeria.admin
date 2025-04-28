@@ -27,7 +27,7 @@ export const AdminRoutes: SideNavInterface[] = [
     title: 'Registrar paciente',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: '',
+    icon: 'check',
     submenu:[]
   },
   {
@@ -43,7 +43,7 @@ export const AdminRoutes: SideNavInterface[] = [
     title: 'Registrar colaborador',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: '',
+    icon: 'check',
     submenu:[]
   },
   {
@@ -82,7 +82,7 @@ export const AdminRoutes: SideNavInterface[] = [
         title: 'Pacientes',
         iconType: 'nzIcon',
         iconTheme: 'outline',
-        icon: '',
+        icon: 'check',
         submenu:[]
       },
       {
