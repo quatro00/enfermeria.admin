@@ -68,6 +68,11 @@ import { ModalVerOfertasComponent } from './components/modal-ver-ofertas/modal-v
 import { CatalogoEncuestasComponent } from './catalogo-encuestas/catalogo-encuestas.component';
 import { CatalogoEncuestasPreguntasComponent } from './catalogo-encuestas-preguntas/catalogo-encuestas-preguntas.component';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { DashboardIndicadoresComponent } from './components/dashboard-indicadores/dashboard-indicadores.component';
+import { DashboardGraficaServiciosPorTipoComponent } from './components/dashboard-grafica-servicios-por-tipo/dashboard-grafica-servicios-por-tipo.component';
+import { DashboardGraficaPagosComponent } from './components/dashboard-grafica-pagos/dashboard-grafica-pagos.component';
+import { DashboardMiniCalendarComponent } from './components/dashboard-mini-calendar/dashboard-mini-calendar.component';
+import { DashboardGraficaIngresosComponent } from './components/dashboard-grafica-ingresos/dashboard-grafica-ingresos.component';
 
 const antdModule = [
   HotTableModule.forRoot(),
@@ -137,7 +142,12 @@ registerAllModules();
     ReporteGuardiasComponent,
     ModalVerOfertasComponent,
     CatalogoEncuestasComponent,
-    CatalogoEncuestasPreguntasComponent
+    CatalogoEncuestasPreguntasComponent,
+    DashboardIndicadoresComponent,
+    DashboardGraficaServiciosPorTipoComponent,
+    DashboardGraficaPagosComponent,
+    DashboardMiniCalendarComponent,
+    DashboardGraficaIngresosComponent
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,30 @@
+<ng-template #loadingSkeleton>
+  <nz-skeleton [nzAvatar]="true" class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+</ng-template>
+
+<ng-container *ngIf="showContent; else loadingSkeleton">
+
+<div class="flex items-center flex-wrap justify-between rounded-10 bg-[white] dark:bg-white/10 overflow-hidden">
+        
+        
+    <div *ngFor="let item of indicadores" class="mb-0 flex-[0_0_auto] relative after:absolute after:w-[1px] after:h-[70px] after:right-[-60px] after:top-1/2 after:transform after:-translate-y-1/2 after:z-10 after:bg-rgb(40, 43, 55) dark:after:bg-white/10">
+      <div class="flex p-[25px]">
+        <div class="flex justify-between gap-[25px]">
+          <div class="rounded-10 flex items-center justify-center w-[70px] h-[70px] bg-{{ item.color}}">
+          <svg-icon class="w-[34px] h-[34px] [&>svg]:w-full [&>svg]:h-full text-white" src="../../../../assets/images/svg/unicons-line/{{ item.icono }}.svg"></svg-icon>
+          </div>
+          <div class="flex gap-[25px]">
+            <div>
+              <h4 class="text-[30px] leading-[1.2] font-semibold mb-0 text-dark dark:text-white/[.87]"><span>{{ item.total }}</span></h4>
+              <span class="text-[16px] text-light dark:text-white/60">{{item.descripcion}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+</ng-container>

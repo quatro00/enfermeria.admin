@@ -4,6 +4,40 @@
     <nz-skeleton [nzAvatar]="true" class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
   </ng-template>
     
-  
+  <div nz-col nzXs="24" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+      <app-dashboard-indicadores></app-dashboard-indicadores>
+    </ng-container>
+  </div>
+
+  <div nz-col nzXs="24" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+     <app-dashboard-grafica-ingresos></app-dashboard-grafica-ingresos>
+    </ng-container>
+  </div>
+
+  <div nz-col nzXs="8" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+     <app-dashboard-mini-calendar></app-dashboard-mini-calendar>
+    </ng-container>
+  </div>
+
+
+  <div nz-col nzXs="8" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+     <app-dashboard-grafica-servicios-por-tipo></app-dashboard-grafica-servicios-por-tipo>
+    </ng-container>
+  </div>
+
+  <div nz-col nzXs="8" class="mb-[25px]">
+    <ng-container *ngIf="showContent; else loadingSkeleton">
+     <app-dashboard-grafica-pagos></app-dashboard-grafica-pagos>
+    </ng-container>
+  </div>
+
+ 
+
+
+
   </div>
   

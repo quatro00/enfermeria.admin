@@ -1,0 +1,29 @@
+<ng-template #loadingSkeleton>
+    <nz-skeleton [nzAvatar]="true" class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+  </ng-template>
+  
+  <ng-container *ngIf="showContent; else loadingSkeleton">
+    <div class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative">
+        <div class="px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] flex flex-wrap items-center justify-between max-sm:flex-col max-sm:h-auto">
+          <h1 class="mb-0 inline-flex items-center py-[16px] max-sm:pb-[5px] overflow-hidden whitespace-nowrap text-ellipsis text-[18px] font-semibold text-dark dark:text-white/[.87]"> Servicios por tipo (Mes actual)</h1>
+        </div>
+        <div class="p-[25px] pt-0">
+          <div class="hexadash-chart-container" dir="ltr">
+            
+            <apx-chart [series]="chartOptions.series"
+              [chart]="chartOptions.chart"
+              [plotOptions]="chartOptions.plotOptions"
+              [labels]="chartOptions.labels"
+              [legend]="chartOptions.legend"
+              [stroke]="chartOptions.stroke"
+              [grid]="chartOptions.grid"
+              [responsive]="chartOptions.responsive"
+              [colors]="chartOptions.colors"
+              >
+            </apx-chart>
+          </div>
+        </div>
+      </div>
+  
+  
+  </ng-container>

@@ -1,0 +1,45 @@
+<ng-template #loadingSkeleton>
+    <nz-skeleton [nzAvatar]="true" class="bg-white dark:bg-white/10 rounded-6 p-[30px] pt-[15px]" [nzShape]="circle" [nzActive]="true" [nzParagraph]="{ rows: 4 }"></nz-skeleton>
+  </ng-template>
+  
+  <ng-container *ngIf="showContent; else loadingSkeleton">
+    <div class="bg-white dark:bg-white/10 m-0 p-0 text-theme-gray dark:text-white/60 text-[15px] rounded-10 relative ">
+        <div
+          class="px-[25px] text-dark dark:text-white/[.87] font-medium text-[17px] flex flex-wrap items-center justify-between max-sm:flex-col max-sm:h-auto max-sm:mb-[15px]">
+          <h1
+            class="mb-0 inline-flex items-center py-[16px] max-sm:pb-[5px] overflow-hidden whitespace-nowrap text-ellipsis text-[18px] font-semibold text-dark dark:text-white/[.87]">
+            Ingresos mensuales</h1>
+            <div class="py-[16px]">
+              <ul class="flex items-center mb-0">
+                <li>
+                  <button type="button" [class]="sellingTab === 'month' ? 'inline-flex items-center bg-primary/10 dark:bg-white/10 px-3 h-8 text-primary dark:text-white/[.87] text-13 font-medium rounded-md' : 'inline-flex items-center px-3 h-8 text-light dark:text-white/60 dark:hover:text-white hover:text-primary text-13 font-medium rounded-md'" (click)="handleClick('month')">
+                    Month
+                  </button>
+                </li>
+              </ul>
+            </div>
+        </div>
+        <div class="p-[25px] pt-0">
+           <div *ngIf="sellingTab === 'month'">
+            <div class="hexadash-chart-container" dir="ltr">
+              <apx-chart
+                  [series]="chartOptions3.series"
+                  [chart]="chartOptions3.chart"
+                  [xaxis]="chartOptions3.xaxis"
+                  [yaxis]="chartOptions3.yaxis"
+                  [dataLabels]="chartOptions3.dataLabels"
+                  [grid]="chartOptions3.grid"
+                  [stroke]="chartOptions3.stroke"
+                  [title]="chartOptions3.title"
+                  [plotOptions]="chartOptions3.plotOptions"
+                  [legend]="chartOptions3.legend"
+                  [tooltip]="chartOptions3.tooltip"
+                  [states]="chartOptions3.states"
+                ></apx-chart>
+            </div>
+           </div>
+        </div>
+      </div>
+  
+  
+  </ng-container>
