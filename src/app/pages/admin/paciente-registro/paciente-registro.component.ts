@@ -137,7 +137,7 @@ isVisible = false;
   guardarContacto(){
     let request: any =
       {
-        id: crypto.randomUUID(),
+        id: '07BE2035-E223-F011-931F-B57F6AB13C2C',
         nombre: this.formContacto.value.nombre,
         telefono: this.formContacto.value.telefono,
         correoElectronico: this.formContacto.value.correoElectronico,
