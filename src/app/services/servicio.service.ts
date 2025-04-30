@@ -56,4 +56,24 @@ export class ServicioService {
 
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
   }
+
+  CancelarServicio(id:any):Observable<any>{
+    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/cancelar-cotizacion`,{});
+  }
+
+  AdjuntarReferencia(formData: FormData): Observable<any> {
+    return this.http.post(`${environment.apiBaseUrl}/api/${this.service}/adjuntar-referencia`,formData);
+  }
+
+  DescargarPago(servicioId:string) {
+
+    const params = new HttpParams()
+    .set('servicioId', servicioId);
+
+    return this.http.get(`${environment.apiBaseUrl}/api/${this.service}/descargar-pago`, {
+    params,
+    responseType: 'blob'
+  });
+  }
+
 }

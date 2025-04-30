@@ -11,20 +11,33 @@
   <ng-template #modalTitleAplicarDescuento>Aplicar descuento</ng-template>
 
   <ng-template #modalContentAplicarDescuento>
-    <form nz-form nzLayout="vertical" [formGroup]="formAplicarDescuento">
-      <nz-form-item>
-          <nz-form-control nzErrorTip="Campo requerido.">
-            <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Descuento (pesos):</nz-form-label>
-            <input formControlName="descuento" style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="number" nz-input >
-          </nz-form-control>
-        </nz-form-item>
-     </form>
+
+    <form nz-form nzLayout="vertical" [formGroup]="formDescuento">
+      <div formArrayName="items">
+        <div *ngFor="let grupo of items.controls; let i = index" [formGroupName]="i" class="item">
+          <!-- Puedes ocultar el ID si no lo necesitas mostrar -->
+          <nz-form-item>
+            <nz-form-control nzErrorTip="Campo requerido.">
+              <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Periodo: {{grupo.get('fecha')?.value}} de {{grupo.get('inicio')?.value}} a {{grupo.get('fin')?.value}} Hrs</nz-form-label>
+              <br>
+              <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Monto de descuento (total:{{grupo.get('total')?.value}}):</nz-form-label>
+              <input formControlName="descuento" style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="number" nz-input >
+            </nz-form-control>
+          </nz-form-item>
+          <input formControlName="id" type="hidden" />
+        </div>
+      </div>
+    
+      <button type="submit"
+      class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
+      nz-button nzType="primary" (click)="guardarDescuentos()" [nzLoading]="btnLoadingAplicarDescuento">Aplicar descuentos</button>
+
+    </form>
+
   </ng-template>
 
   <ng-template #modalFooterAplicarDescuento>
-    <button
-      class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
-      nz-button nzType="primary" (click)="AplicarDescuentoCotizacion()" [nzLoading]="btnLoadingAplicarDescuento">Aplicar</button>
+   
   </ng-template>
 </nz-modal>
 
@@ -47,6 +60,50 @@
     <button
       class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
       nz-button nzType="primary" (click)="EnviarCotizacionCorreo()" [nzLoading]="btnLoadingEnviarCorreo">Enviar</button>
+  </ng-template>
+</nz-modal>
+
+<nz-modal [nzMaskClosable]="false"  [(nzVisible)]="isVisibleAdjuntarTransferencia" [nzTitle]="modalTitleAdjuntarTransferencia"
+  [nzContent]="modalContentAdjuntarTransferencia" [nzFooter]="modalFooterAdjuntarTransferencia" (nzOnCancel)="cerrarAdjuntarTransferencia()">
+  <ng-template #modalTitleAdjuntarTransferencia>Adjuntar transferencia</ng-template>
+
+  <ng-template #modalContentAdjuntarTransferencia>
+    <form nz-form nzLayout="vertical" [formGroup]="formSubirTransferencia">
+      <nz-form-item>
+          <nz-form-control nzErrorTip="Campo requerido.">
+            <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">Referencia:</nz-form-label>
+            <input formControlName="referencia" style="color:white" class="w-full rounded-4 border-normal border-1 text-[15px] dark:bg-white/10 dark:border-white/10 px-[20px] py-[12px] h-[46px] outline-none placeholder:text-[#A0A0A0] text-theme-gray dark:text-white/60" type="text" nz-input >
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-label class="text-[15px] font-semibold text-dark capitalize mb-[10px]">
+            Transferencia:
+          </nz-form-label>
+          <nz-form-control [nzErrorTip]="'Campo requerido.'">
+            <nz-upload
+              class="w-full"
+              [nzAccept]="'.pdf'"
+              [nzBeforeUpload]="beforeUploadTransferencia"
+              [nzShowUploadList]="false">
+              <button nz-button
+                class="text-theme-gray dark:text-white/60 flex capitalize items-center justify-between h-[50px] border-normal border-1 dark:border-white/10 rounded-4 px-[20px] py-5px w-full">
+                <span>{{transferenciaTitulo}}</span>
+                <span class="flex items-center h-full ltr:border-l-1 rtl:border-r-1 border-normal dark:border-white/10 ps-[25px]">
+                  Buscar
+                </span>
+              </button>
+            </nz-upload>
+          </nz-form-control>
+        </nz-form-item>
+
+     </form>
+  </ng-template>
+
+  <ng-template #modalFooterAdjuntarTransferencia>
+    <button
+      class="bg-primary hover:bg-primary-hbr hover:border-primary-hbr border-solid border-1 border-primary text-white dark:text-white/[.87] text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px]"
+      nz-button nzType="primary" (click)="EnviarTransferencia()" [nzLoading]="btnLoadingAdjuntarTransferencia">Enviar</button>
   </ng-template>
 </nz-modal>
 
@@ -270,11 +327,24 @@
                                   <span class="text-[14px]" nz-icon nzType="mail" nzTheme="outline"></span>
                                 </button>
 
-                                <button (click)="AbrirModalAplicarDescuento(item)" *ngIf="item.estatus === 'EN COTIZACION'"
+                                <button (click)="AbrirModalAplicarDescuento(item.id)" *ngIf="item.estatus === 'EN COTIZACION'"
                                   nz-tooltip nzTooltipTitle="Aplicar descuento" nz-button
                                   class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[14px] h-[44px]">
                                   <span class="text-[14px]" nz-icon nzType="dollar" nzTheme="outline"></span>
                                 </button>
+
+                                <button (click)="CancelarCotizacion(item.id)" *ngIf="item.estatus === 'EN COTIZACION'" nz-tooltip nzTooltipTitle="Cancelar cotización"
+                                nz-button
+                                class="bg-danger/10 hover:bg-danger-hbr border-none text-danger hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[20px] h-[44px] [&>span]:inline-flex">
+                                <span class="text-[14px]" nz-icon nzType="delete" nzTheme="outline"></span>
+                              </button>
+
+                              <button (click)="AbrirModalAdjuntarTransferencia(item.id)" *ngIf="item.estatus === 'EN COTIZACION'"
+                                  nz-tooltip nzTooltipTitle="Adjuntar referencia" nz-button
+                                  class="bg-success/10 hover:bg-success-hbr border-none text-success hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[14px] h-[44px]">
+                                  <span class="text-[14px]" nz-icon nzType="upload" nzTheme="outline"></span>
+                                </button>
+
 
                                 <button (click)="verOfertas(item.id)" *ngIf="item.estatus === 'PAGADO'"
                                   nz-tooltip nzTooltipTitle="Ver ofertas" nz-button
@@ -282,10 +352,16 @@
                                   <span class="text-[14px]" nz-icon nzType="dollar" nzTheme="outline"></span>
                                 </button>
 
-                                <button (click)="CancelarServicio(item)" *ngIf="item.estatus === 'PAGADO'"
+                                <button (click)="CancelarServicio(item)" *ngIf="item.estatus === 'PAGADO_Exit'"
                                   nz-tooltip nzTooltipTitle="Cancelar" nz-button
                                   class="bg-danger/10 hover:bg-danger-hbr border-none text-danger hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[14px] h-[44px]">
                                   <span class="text-[14px]" nz-icon nzType="stop" nzTheme="outline"></span>
+                                </button>
+
+                                <button (click)="DescargarTransferencia(item.id)" *ngIf="item.estatus === 'PAGADO'"
+                                  nz-tooltip nzTooltipTitle="Descargar transferencia" nz-button
+                                  class="bg-secondary/10 hover:bg-secondary-hbr border-none text-secondary hover:text-white text-[14px] font-semibold leading-[22px] inline-flex items-center justify-center rounded-[4px] px-[14px] h-[44px]">
+                                  <span class="text-[14px]" nz-icon nzType="download" nzTheme="outline"></span>
                                 </button>
 
                               </div>

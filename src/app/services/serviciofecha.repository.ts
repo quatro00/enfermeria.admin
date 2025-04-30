@@ -98,4 +98,14 @@ export class ServicioFechaService {
     return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias-fechas`,{params});
   }
 
+  GetServiciosFechaByServicio(servicioId:string):Observable<any>{
+    let params = new HttpParams();
+    params = params.set('ServicioId', servicioId);
+    
+    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-servicios-fechas`,{params});
+  }
+
+  AplicarDescuentos(request:any):Observable<any>{
+    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/asignar-descuentos`,request);
+  }
 }

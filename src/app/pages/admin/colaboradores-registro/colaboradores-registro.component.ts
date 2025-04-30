@@ -85,6 +85,7 @@ export class ColaboradoresRegistroComponent {
               banco: [null, [Validators.required]],
               clabe: [null, [Validators.required]],
               cuenta: [null, [Validators.required]],
+              comision: [null, [Validators.required]],
               
               
             });
@@ -142,7 +143,8 @@ export class ColaboradoresRegistroComponent {
         clabe: this.form.value.clabe,
         cuenta: this.form.value.cuenta,
         tipoEnfermeraId:this.form.value.tipoEnfermera,
-        estados:this.form.value.estados
+        estados:this.form.value.estados,
+        comision: this.form.value.comision
       }
       
     if (this.form.valid) {

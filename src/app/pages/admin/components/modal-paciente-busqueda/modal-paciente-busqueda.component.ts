@@ -50,31 +50,25 @@ export class ModalPacienteBusquedaComponent {
       compare: (a: any, b: any) => a.estatusContratoMantenimientoId.localeCompare(b.estatusContratoMantenimientoId)
     },
     {
-      title: 'Edad',
-      key: 'edad',
-      compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
-    },
-    
-    {
-      title: 'Peso',
+      title: 'Peso(kg)',
       key: 'peso',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'Estatura',
+      title: 'Estatura(cms)',
       key: 'estatura',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'Discpacidad',
+      title: 'Discapacidad',
       key: 'discapacidad',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
-      title: 'Descripción',
-      key: 'descripcion',
+      title: 'Desc. discapacidad',
+      key: 'estatura',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
-    },
+    }
   ];
 
   data: any[] = [];
@@ -96,7 +90,7 @@ export class ModalPacienteBusquedaComponent {
           ngOnInit() {
           
               this.form = this.fb.group({
-                nombreCorreo: [null, [Validators.required]]
+                nombreCorreo: [null, []]
               });
           
               
@@ -155,7 +149,6 @@ export class ModalPacienteBusquedaComponent {
     } else {
       
       Object.values(this.form.controls).forEach(control => {
-        alert(3);
         if (control.invalid) {
           control.markAsDirty();
           control.updateValueAndValidity({

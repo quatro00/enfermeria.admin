@@ -90,7 +90,7 @@ export const AdminRoutes: SideNavInterface[] = [
         title: 'Colaboradores',
         iconType: 'nzIcon',
         iconTheme: 'outline',
-        icon: '',
+        icon: 'check',
         submenu:[]
       },
       {

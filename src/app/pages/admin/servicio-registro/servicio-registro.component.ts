@@ -7,6 +7,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { forkJoin } from 'rxjs';
 import { EstadoService } from 'src/app/services/estado.service';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MunicipioService } from 'src/app/services/municipio.service';
 import { ServicioService } from 'src/app/services/servicio.service';
 import { TipoEnfermeraService } from 'src/app/services/tipoEnfermera.service';
 import { TipoLugarService } from 'src/app/services/tipoLugarService';
@@ -44,6 +45,7 @@ export class ServicioRegistroComponent {
   formServicio!: UntypedFormGroup;
 
   estados: any[] = [];
+  municipios: any[] = [];
   tipoEnfermera: any[] = [];
   tipoLugar: any[] = [];
   pacienteSeleccionado: any = {};
@@ -87,7 +89,8 @@ export class ServicioRegistroComponent {
     private tipoEnfermeraService: TipoEnfermeraService,
     private estadoService: EstadoService,
     private tipoLugarService: TipoLugarService,
-    private servicioService: ServicioService
+    private servicioService: ServicioService,
+    private municipioService: MunicipioService
   ) { }
 
   ngOnInit() {
@@ -95,6 +98,7 @@ export class ServicioRegistroComponent {
     this.formServicio = this.fb.group({
       principalRazon: [null, [Validators.required]],
       estado: [null, [Validators.required]],
+      municipio: [null, [Validators.required]],
       direccion: [null, [Validators.required]],
       requiereAyudaBasica: [null, [Validators.required]], //ok
       requiereAyudaBasicaDesc: [null, [Validators.required]],//ok
@@ -132,9 +136,48 @@ export class ServicioRegistroComponent {
       estatura: [null, [Validators.required]]
     });
 
+    this.formServicio.get('estado')?.valueChanges.subscribe(estadoId => {
+      this.loadMunicipios(estadoId);
+    });
+
     this.loadData();
   }
 
+  loadMunicipios(estadoId: any): void {
+    // Aquí debes cargar los municipios según el estado
+    // De ejemplo, los pondré manualmente
+    this.municipioService.Get(estadoId)
+      .subscribe({
+        next: (response) => {
+          this.municipios = response;
+        },
+        complete: () => {
+          
+        },
+        error: () => {
+          this.isLoading = false;
+        }
+      })
+    /*
+    if (estadoId === 1) {
+      this.municipios = [
+        { id: 1, nombre: 'Monterrey' },
+        { id: 2, nombre: 'San Pedro' },
+      ];
+    } else if (estadoId === 2) {
+      this.municipios = [
+        { id: 3, nombre: 'Guadalajara' },
+        { id: 4, nombre: 'Zapopan' },
+      ];
+    } else {
+      this.municipios = [];
+    }
+
+    // Importante: limpiar el municipio seleccionado si cambia el estado
+    this.form.get('municipio')?.setValue(null);
+    */
+  }
+  
   guardar() {
 
     if (this.pacienteSeleccionado.id == null) {
@@ -146,6 +189,8 @@ export class ServicioRegistroComponent {
       pacienteId: this.pacienteSeleccionado.id,
       motivo: this.formServicio.value.principalRazon,
       estadoId: this.formServicio.value.estado,
+      municipioId: this.formServicio.value.municipio,
+
       direccion: this.formServicio.value.direccion,
       requiereAyudaBasica: this.formServicio.value.requiereAyudaBasica,
       requiereAyudaBasicaDesc: this.formServicio.value.requiereAyudaBasicaDesc,
@@ -165,7 +210,7 @@ export class ServicioRegistroComponent {
       requiereAtencionNeurologicaDesc: this.formServicio.value.requiereAtencionNeurologicaDesc,
       cuidadosCriticos: this.formServicio.value.requiereCuidadosCriticos,
       cuidadosCriticosDesc: this.formServicio.value.requiereCuidadosCriticosDesc,
-
+      
       tipoLugarId: this.formServicio.value.tipoLugar,
       tipoEnfermeraId: this.formServicio.value.tipoEnfermera,
       observaciones: this.formServicio.value.observaciones,
