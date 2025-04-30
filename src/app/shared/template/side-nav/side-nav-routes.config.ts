@@ -9,7 +9,7 @@ export const AdminRoutes: SideNavInterface[] = [
     title: 'Dashboard',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: '',
+    icon: 'check',
     submenu:[]
   },
   /*
@@ -66,7 +66,7 @@ export const AdminRoutes: SideNavInterface[] = [
         title: 'Servicios',
         iconType: 'nzIcon',
         iconTheme: 'outline',
-        icon: '',
+        icon: 'check',
         submenu:[]
       },
       {
