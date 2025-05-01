@@ -62,6 +62,7 @@ export class PagoRegistroComponent {
   serviciosSeleccionados = 0;
   totalColaboradores = 0;
   montoBruto = 0;
+  descuentos = 0;
   comisiones = 0;
   retenciones = 0;
   costoOperativo = 0;
@@ -94,6 +95,11 @@ export class PagoRegistroComponent {
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
+      title: 'Descuento',
+      key: 'descuento',
+      compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
+    },
+    {
       title: 'Comision',
       key: 'comision',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
@@ -108,6 +114,7 @@ export class PagoRegistroComponent {
       key: 'costosOperativos',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
+    
     {
       title: 'Total',
       key: 'total',
@@ -187,11 +194,12 @@ export class PagoRegistroComponent {
 
     const activos = this.filteredData.filter(item => item.pago === true);
 
-    this.montoBruto = activos.reduce((acc, item) => acc + item.importeSolicitado, 0);
+    this.montoBruto = activos.reduce((acc, item) => acc + item.total, 0);
+    this.descuentos = activos.reduce((acc, item) => acc + item.descuento, 0);
     this.comisiones = activos.reduce((acc, item) => acc + item.comision, 0);
     this.retenciones = activos.reduce((acc, item) => acc + item.retenciones, 0);
-    this.costoOperativo = activos.reduce((acc, item) => acc + item.costoOperativos, 0);
-    this.montoATransferir = activos.reduce((acc, item) => acc + item.total, 0);
+    this.costoOperativo = activos.reduce((acc, item) => acc + item.costosOperativos, 0);
+    this.montoATransferir = this.montoBruto - this.descuentos - this.comisiones - this.retenciones - this.costoOperativo;
     this.serviciosSeleccionados = activos.length;
     this.totalColaboradores = new Set(activos.map(item => item.colaborador)).size;
   }

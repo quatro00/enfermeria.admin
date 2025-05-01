@@ -233,6 +233,7 @@ export class ReporteServicioComponent {
     });
   }
 
+  
   AbrirModalAdjuntarTransferencia(id){
     this.servicioSeleccionado = id;
     this.formSubirTransferencia.reset();

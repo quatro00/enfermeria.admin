@@ -35,7 +35,7 @@ export const AdminRoutes: SideNavInterface[] = [
     title: 'Registrar servicio',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: '',
+    icon: 'check',
     submenu:[]
   },
   {
@@ -51,7 +51,7 @@ export const AdminRoutes: SideNavInterface[] = [
     title: 'Registrar pago',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: '',
+    icon: 'check',
     submenu:[]
   },
   {
@@ -59,7 +59,7 @@ export const AdminRoutes: SideNavInterface[] = [
     title: 'Reportes',
     iconType: 'nzIcon',
     iconTheme: 'outline',
-    icon: '',
+    icon: 'check',
     submenu:[
       {
         path: 'administrador/reporte-servicio',
@@ -74,7 +74,7 @@ export const AdminRoutes: SideNavInterface[] = [
         title: 'Guardias',
         iconType: 'nzIcon',
         iconTheme: 'outline',
-        icon: '',
+        icon: 'check',
         submenu:[]
       },
       {
@@ -98,7 +98,7 @@ export const AdminRoutes: SideNavInterface[] = [
         title: 'Pagos',
         iconType: 'nzIcon',
         iconTheme: 'outline',
-        icon: '',
+        icon: 'check',
         submenu:[]
       }]
   },

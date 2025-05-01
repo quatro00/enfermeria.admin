@@ -54,7 +54,7 @@ export class ReporteGuardiasComponent {
   listOfColumn = [
     {
       title: 'No servicio',
-      key: 'no',
+      key: 'noServicio',
       compare: (a: any, b: any) => a.noContrato.localeCompare(b.noContrato)
     },
     {
@@ -64,12 +64,12 @@ export class ReporteGuardiasComponent {
     },
     {
       title: 'Inicio',
-      key: 'inicio',
+      key: 'fechaInicio',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
       title: 'Termino',
-      key: 'termino',
+      key: 'fechaFin',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     },
     {
@@ -79,7 +79,7 @@ export class ReporteGuardiasComponent {
     },
     {
       title: 'Estatus',
-      key: 'estatus',
+      key: 'estatusServicioFecha',
       compare: (a: any, b: any) => a.importe.localeCompare(b.importe)
     }
   ];
@@ -128,6 +128,23 @@ export class ReporteGuardiasComponent {
     this.showContent = true;
   }
 
+  filterItems(): void {
+    this.filteredData = this.applyFilters();
+  }
+
+  private applyFilters(): any[] {
+      
+    return this.data.filter((data2) =>
+      data2.noServicio.toString().toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      data2.colaborador.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      data2.fechaInicio.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      data2.fechaFin.toLowerCase().includes(this.searchValue.toLowerCase()) ||
+
+      data2.cantidadHoras.toString().toLowerCase().includes(this.searchValue.toLowerCase()) ||
+      data2.estatusServicioFecha.toString().toLowerCase().includes(this.searchValue.toLowerCase()) 
+    );
+  }
+
   TerminarGuardia(item): void {
     this.modalService.info({
       nzTitle: '<h2 class="text-dark dark:text-white/[.87]"> Terminación de guardia</h2>',
@@ -148,6 +165,19 @@ export class ReporteGuardiasComponent {
 
       }
     });
+  }
+
+  exportToExcel(){
+    const formattedData = this.filteredData.map(item => {
+      const formattedItem = {};
+      this.listOfColumn.forEach(column => {
+        // Usa la propiedad `key` para acceder al valor en `item`
+        formattedItem[column.title] = item[column.key];
+      });
+      return formattedItem;
+    });
+
+    this.excelService.exportTableToExcel(formattedData,'Guardias');
   }
 
   DesasignarGuardia(item): void {
