@@ -17,19 +17,19 @@ export class ServicioFechaService {
     
 
   AsignarOferta(id:string, request:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/asignar-oferta`,request);
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/asignar-oferta`,request);
   }
 
   TerminarOferta(id:string):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/terminar-oferta`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/terminar-oferta`,{});
   }
 
   CancelarOferta(id:string):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/cancelar-oferta`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/cancelar-oferta`,{});
   }
 
   DesasignarOferta(id:string):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/liberar-oferta`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/liberar-oferta`,{});
   }
 
   Get(servicioId?:string):Observable<any>{
@@ -39,7 +39,7 @@ export class ServicioFechaService {
       params = params.set('ServicioId', servicioId);
     }
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{params});
   }
 
   GetGuardias(
@@ -67,7 +67,7 @@ export class ServicioFechaService {
     }
 
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/obtener-guardias`,{params});
   }
 
   GetServicioFechaFiltros(
@@ -95,17 +95,17 @@ export class ServicioFechaService {
     }
 
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias-fechas`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/obtener-guardias-fechas`,{params});
   }
 
   GetServiciosFechaByServicio(servicioId:string):Observable<any>{
     let params = new HttpParams();
     params = params.set('ServicioId', servicioId);
     
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/obtener-servicios-fechas`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/obtener-servicios-fechas`,{params});
   }
 
   AplicarDescuentos(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/asignar-descuentos`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/asignar-descuentos`,request);
   }
 }

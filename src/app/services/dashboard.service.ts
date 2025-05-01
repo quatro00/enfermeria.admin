@@ -25,7 +25,7 @@ export class DashboardService {
         params = params.set('Periodo', periodo);
       }
 
-    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/api/${this.service}/obtener-indicadores`,{params});
+    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/${this.service}/obtener-indicadores`,{params});
   }
 
   GetGraficaTipoServicios(periodo?:string):Observable<GetColaboradoresModel>{
@@ -35,7 +35,7 @@ export class DashboardService {
         params = params.set('Periodo', periodo);
       }
 
-    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/api/${this.service}/obtener-grafica-tipo-servicios`,{params});
+    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/${this.service}/obtener-grafica-tipo-servicios`,{params});
   }
 
   GetGraficaPagos(periodo?:string):Observable<GetColaboradoresModel>{
@@ -45,18 +45,18 @@ export class DashboardService {
         params = params.set('Periodo', periodo);
       }
 
-    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/api/${this.service}/obtener-grafica-pagos`,{params});
+    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/${this.service}/obtener-grafica-pagos`,{params});
   }
 
   GetGuardiasProximas():Observable<GetColaboradoresModel>{
     let params = new HttpParams();
 
-    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/api/${this.service}/obtener-guardias-proximas`,{params});
+    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/${this.service}/obtener-guardias-proximas`,{params});
   }
 
   GetGraficaIngresos():Observable<GetColaboradoresModel>{
     let params = new HttpParams();
 
-    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/api/${this.service}/obtener-grafica-ingresos`,{params});
+    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/${this.service}/obtener-grafica-ingresos`,{params});
   }
 }

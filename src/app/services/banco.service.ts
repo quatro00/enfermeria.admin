@@ -15,7 +15,7 @@ export class BancoService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   Get():Observable<any>{
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`);
   }
   /*
   GetActivos():Observable<any>{

@@ -29,22 +29,22 @@ export class PacienteService {
     params = params.set('correoElectronico', correoElectronico);
   }
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{params});
   }
 
   GetById(id:any):Observable<any>{
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/${id}`);
   }
 
   Desactivar(id:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/desactivar`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/desactivar`,{});
   }
 
   Reactivar(id:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/reactivar`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/reactivar`,{});
   }
   Update(id:string, request:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,request);
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}`,request);
   }
 
 }

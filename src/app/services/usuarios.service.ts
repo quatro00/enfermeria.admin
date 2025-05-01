@@ -17,10 +17,10 @@ export class UsuariosService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   GetUsuarios(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/GetUsuarios`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/GetUsuarios`,request);
   }
 
   CreateUsuarioProveedor(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/CreateUsuarioProveedor`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/CreateUsuarioProveedor`,request);
   }
 }

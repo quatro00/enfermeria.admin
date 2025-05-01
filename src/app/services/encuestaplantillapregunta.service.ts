@@ -15,28 +15,28 @@ export class EncuestaPlantillaPreguntaService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   Crear(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}`,request);
   }
 
   GetAll(id):Observable<any>{
     let params = new HttpParams();
     params = params.set('plantillaId', id);
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,{});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/${id}`,{});
   }
 
   GetById(id:any):Observable<any>{
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/${id}`);
   }
 
   Desactivar(id:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/desactivar`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/desactivar`,{});
   }
 
   Reactivar(id:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/reactivar`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/reactivar`,{});
   }
   Update(id:string, request:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,request);
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}`,request);
   }
 
 }

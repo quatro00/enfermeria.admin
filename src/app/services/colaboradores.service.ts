@@ -18,7 +18,7 @@ export class ColaboradoresService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   EnviarDoccumentacion(formData: FormData): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/api/${this.service}/AdjuntarDocumentacion`,formData);
+    return this.http.post(`${environment.apiBaseUrl}/${this.service}/AdjuntarDocumentacion`,formData);
   }
 
   GetColaboradores(request:any):Observable<any>{
@@ -39,25 +39,25 @@ export class ColaboradoresService {
     if (request.tipo) {
       params = params.set('Tipo', request.tipo);
     }
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{params});
   }
 
   GetColaborador(colaboradorId:string):Observable<GetColaboradoresModel>{
     let params = new HttpParams();
     params = params.append('id', colaboradorId);
 
-    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/api/${this.service}/GetColaborador`,{params});
+    return this.http.get<GetColaboradoresModel>(`${environment.apiBaseUrl}/${this.service}/GetColaborador`,{params});
   }
 
   Create(request:CreateColaboradorModel):Observable<CreateColaboradorModel>{
-    return this.http.post<CreateColaboradorModel>(`${environment.apiBaseUrl}/api/${this.service}`,request);
+    return this.http.post<CreateColaboradorModel>(`${environment.apiBaseUrl}/${this.service}`,request);
   }
 
   Update(id:string, request:UpdateColaboradorModel):Observable<UpdateColaboradorModel>{
-    return this.http.put<UpdateColaboradorModel>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,request);
+    return this.http.put<UpdateColaboradorModel>(`${environment.apiBaseUrl}/${this.service}/${id}`,request);
   }
 
   ActivarColaborador(id:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/ActivarColaborador`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/ActivarColaborador`,{});
   }
 }

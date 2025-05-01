@@ -15,7 +15,7 @@ export class PagoLoteService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   Crear(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}`,request);
   }
 
   GetPagoLote(periodo?:any, estatusPagoLote?:any):Observable<any>{
@@ -27,11 +27,11 @@ export class PagoLoteService {
     if(estatusPagoLote != null)
       params = params.append('EstatusPagoLoteId', estatusPagoLote);
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{params});
   }
 
   SubirDeposito(formData: FormData): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/api/${this.service}/subir-deposito`,formData);
+    return this.http.post(`${environment.apiBaseUrl}/${this.service}/subir-deposito`,formData);
   }
 
   DescargarDeposito(pagoLoteId: string, referencia:string) {
@@ -40,7 +40,7 @@ export class PagoLoteService {
     .set('pagoLoteId', pagoLoteId)
     .set('referencia', referencia);
 
-    return this.http.get(`${environment.apiBaseUrl}/api/${this.service}/descargar-deposito`, {
+    return this.http.get(`${environment.apiBaseUrl}/${this.service}/descargar-deposito`, {
     params,
     responseType: 'blob'
   });

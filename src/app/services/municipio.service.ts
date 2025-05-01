@@ -21,6 +21,6 @@ export class MunicipioService {
     if (estadoId) {
         params = params.set('EstadoId', estadoId);
       }
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{ params });
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{ params });
   }
 }

@@ -15,6 +15,6 @@ export class ConfiguracionService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   UploadReporteAltas(formData: FormData): Observable<any> {
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/UploadReporteAltas`, formData);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/UploadReporteAltas`, formData);
   }
 }

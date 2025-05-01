@@ -23,6 +23,6 @@ export class ServicioFechasOfertaService {
       params = params.set('ServicioFechaId', servicioFechaId);
     }
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{params});
   }
 }

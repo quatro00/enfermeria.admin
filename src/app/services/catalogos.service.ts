@@ -16,18 +16,18 @@ export class CatalogosService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   GetTipoGrua():Observable<any[]>{
-    return this.http.get<any[]>(`${environment.apiBaseUrl}/api/${this.service}/GetTipoGrua`);
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/${this.service}/GetTipoGrua`);
   }
 
   GetEstatusServicio():Observable<any[]>{
-    return this.http.get<any[]>(`${environment.apiBaseUrl}/api/${this.service}/GetEstatusServicio`);
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/${this.service}/GetEstatusServicio`);
   }
 
   GetEstatusPago():Observable<any[]>{
-    return this.http.get<any[]>(`${environment.apiBaseUrl}/api/${this.service}/GetEstatusPago`);
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/${this.service}/GetEstatusPago`);
   }
 
   GetEstados():Observable<any[]>{
-    return this.http.get<any[]>(`${environment.apiBaseUrl}/api/${this.service}/GetEstados`);
+    return this.http.get<any[]>(`${environment.apiBaseUrl}/${this.service}/GetEstados`);
   }
 }

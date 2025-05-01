@@ -20,25 +20,25 @@ export class PagosService {
     let params = new HttpParams();
     params = params.append('id', id);
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/GetServiciosPorPagar/${id}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/GetServiciosPorPagar/${id}`);
   }
 
   RegistrarPagoServicios(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/RegistrarPagoServicios`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/RegistrarPagoServicios`,request);
   }
 
   GetPagos(pagoLoteId?:string):Observable<any>{
     let params = new HttpParams();
     params = params.append('PagoLoteId', pagoLoteId);
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`, {params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`, {params});
   }
 
   GetDepositos(pagoLoteId?:string):Observable<any>{
     let params = new HttpParams();
     params = params.append('PagoLoteId', pagoLoteId);
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/ver-depositos`, {params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/ver-depositos`, {params});
   }
 
 }

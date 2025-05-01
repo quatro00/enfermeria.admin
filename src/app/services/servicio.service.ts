@@ -15,22 +15,22 @@ export class ServicioService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   Crear(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}`,request);
   }
   
   DescargarCotizacion(id: string) {
-    return this.http.get(`${environment.apiBaseUrl}/api/${this.service}/ObtenerCotizacion/${id}`, {
+    return this.http.get(`${environment.apiBaseUrl}/${this.service}/ObtenerCotizacion/${id}`, {
       responseType: 'blob' // importante para recibir PDF
     });
   }
 
   EnviarCotizacionPorCorreo(id: string, correoAdicional: string) {
-    const url = `${environment.apiBaseUrl}/api/${this.service}/enviar-cotizacion/${id}?correoAdicional=${encodeURIComponent(correoAdicional)}`;
+    const url = `${environment.apiBaseUrl}/${this.service}/enviar-cotizacion/${id}?correoAdicional=${encodeURIComponent(correoAdicional)}`;
     return this.http.post(url, null); // null porque no se envía body
   }
 
   AplicarDescuento(id: string, monto: string) {
-    const url = `${environment.apiBaseUrl}/api/${this.service}/aplicar-descuento/${id}?monto=${encodeURIComponent(monto)}`;
+    const url = `${environment.apiBaseUrl}/${this.service}/aplicar-descuento/${id}?monto=${encodeURIComponent(monto)}`;
     return this.http.post(url, null); // null porque no se envía body
   }
 
@@ -54,15 +54,15 @@ export class ServicioService {
     }
 
 
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`,{params});
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`,{params});
   }
 
   CancelarServicio(id:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}/cancelar-cotizacion`,{});
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/cancelar-cotizacion`,{});
   }
 
   AdjuntarReferencia(formData: FormData): Observable<any> {
-    return this.http.post(`${environment.apiBaseUrl}/api/${this.service}/adjuntar-referencia`,formData);
+    return this.http.post(`${environment.apiBaseUrl}/${this.service}/adjuntar-referencia`,formData);
   }
 
   DescargarPago(servicioId:string) {
@@ -70,7 +70,7 @@ export class ServicioService {
     const params = new HttpParams()
     .set('servicioId', servicioId);
 
-    return this.http.get(`${environment.apiBaseUrl}/api/${this.service}/descargar-pago`, {
+    return this.http.get(`${environment.apiBaseUrl}/${this.service}/descargar-pago`, {
     params,
     responseType: 'blob'
   });

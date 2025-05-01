@@ -15,26 +15,26 @@ export class EstadoService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   Get():Observable<any>{
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`);
   }
 
   GetActivos():Observable<any>{
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}/GetActivos`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}/GetActivos`);
   }
 
   Create(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}`,request);
   }
 
   Update(id:string, request:any):Observable<any>{
-    return this.http.put<any>(`${environment.apiBaseUrl}/api/${this.service}/${id}`,request);
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}`,request);
   }
 
   Activar(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/Activar`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/Activar`,request);
   }
 
   Desactivar(request:any):Observable<any>{
-    return this.http.post<any>(`${environment.apiBaseUrl}/api/${this.service}/Desactivar`,request);
+    return this.http.post<any>(`${environment.apiBaseUrl}/${this.service}/Desactivar`,request);
   }
 }

@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http:HttpClient, private cookieService: CookieService) { }
 
   Login(request:LoginRequest):Observable<LoginResponse>{
-    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/api/Auth/login`,{
+    return this.http.post<LoginResponse>(`${environment.apiBaseUrl}/auth/login`,{
       Username: request.Username,
       Password: request.Password
     });

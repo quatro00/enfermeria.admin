@@ -16,7 +16,7 @@ export class TipoLugarService {
 
   Get():Observable<any>{
    
-    return this.http.get<any>(`${environment.apiBaseUrl}/api/${this.service}`);
+    return this.http.get<any>(`${environment.apiBaseUrl}/${this.service}`);
   }
 
   
