@@ -60,4 +60,8 @@ export class ColaboradoresService {
   ActivarColaborador(id:any):Observable<any>{
     return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/ActivarColaborador`,{});
   }
+
+  CrearCuenta(id:any):Observable<any>{
+    return this.http.put<any>(`${environment.apiBaseUrl}/${this.service}/${id}/CrearCuenta`,{});
+  }
 }

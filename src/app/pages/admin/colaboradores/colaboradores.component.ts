@@ -361,6 +361,29 @@ export class ColaboradoresComponent {
     });
   }
 
+  confirmarCrearCuenta(item): void {
+    this.item = item;
+    this.modalService.info({
+      nzTitle: '<h2 class="text-dark dark:text-white/[.87]"> Crear cuenta colaborador</h2>',
+      nzContent: '<p class="text-theme-gray dark:text-white/60">Deseas crear la cuenta al colaborador seleccionado?</p>',
+      nzOnOk: () => {
+        
+        this.colaboradoresService.CrearCuenta(item.id)
+        .subscribe({
+          next: (response) => {
+            this.msg.success('Cuenta creada correctamente.');
+          },
+          complete: () => {
+            
+          },
+          error: (err) => {
+            //console.log(err);
+            this.msg.error('Ocurrio un error al crear la cuenta.');
+          }
+    })
+      }
+    });
+  }
 
   guardarDocumentacion(){
     var valido = false;
